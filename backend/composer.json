@@ -1,0 +1,16 @@
+{
+    "name": "brainiac/bbcampform",
+    "description": "BB Camp Registration Form",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Brainiac Erudite",
+            "email": "brainiachades@gmail.com"
+        }
+    ],
+    "require": {}
+}
