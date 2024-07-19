@@ -1,2 +1,6 @@
 vendor
 .env
+db.sql
+src/error.log
+src/Services/db.sql
+src/Services/functions.php
