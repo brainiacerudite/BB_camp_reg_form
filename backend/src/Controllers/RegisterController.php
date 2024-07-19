@@ -18,6 +18,18 @@ class RegisterController extends Controller
             $errors['name'] = 'Name field is required';
         }
 
+        if (empty($payload['gender'])) {
+            $errors['gender'] = 'Gender field is required';
+        }
+
+        if (empty($payload['company'])) {
+            $errors['company'] = 'Company field is required';
+        }
+
+        if (empty($payload['section'])) {
+            $errors['section'] = 'Section field is required';
+        }
+
         // check if there is errors and return 422
         if (!empty($errors)) {
             http_response_code(422);
