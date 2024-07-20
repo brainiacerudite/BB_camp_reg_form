@@ -9,7 +9,7 @@ function Hero() {
       style={{ backgroundImage: `url(${images.heroBgImage.src})` }}
       className="w-full min-h-[100svh] relative bg-cover bg-center flex justify-center items-center px-4"
     >
-      <div className="w-full flex flex-col space-y-16">
+      <div className="w-full flex flex-col space-y-16 -mt-12">
         <div className="flex flex-col justify-center items-center gap-4 lg:hidden">
           <Anchor />
           <h4 className="text-2xl text-center text-white font-bold">
