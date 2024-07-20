@@ -6,6 +6,10 @@ export default {
       colors: {
         bgGlassMorphism: "rgba(67, 67, 5, 0.28)",
         borderColor: "#FEFE007D",
+        borderScale: {
+          1: "rgba(254, 254, 0, 0.49)",
+          2: "rgba(255, 61, 0, 0.31)",
+        },
       },
       backgroundImage: {
         btnGradientColor:
