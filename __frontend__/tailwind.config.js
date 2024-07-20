@@ -9,7 +9,7 @@ export default {
       },
       backgroundImage: {
         btnGradientColor:
-          "linear-gradient(to right bottom, rgba(254, 254, 0, 0.86), rgba(255, 61, 0, 0.46))",
+          "linear-gradient(to right bottom, #FEFE00, #FF3D00) 86% 46%",
       },
     },
   },

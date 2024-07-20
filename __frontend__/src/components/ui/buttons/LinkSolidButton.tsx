@@ -12,9 +12,9 @@ const LinkSolidButton = ({ type, text, to }: LinkSolidButtonProps) => {
       <Link to={to}>
         <button
           type={type}
-          className="w-full max-w-[360px] text-white font-medium py-4 px-6 rounded-lg bg-btnGradientColor"
+          className="w-full max-w-[360px] text-white font-bold rounded-lg bg-gradient-to-br from-[#FEFE00] to-[#FF3D00] p-[0.5px]"
         >
-          {text}
+          <div className="w-full h-full py-4 px-6 rounded-lg bg-btnGradientColor">{text}</div>
         </button>
       </Link>
     </div>
