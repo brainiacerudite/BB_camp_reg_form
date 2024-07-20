@@ -44,7 +44,9 @@ class RegisterController extends Controller
             exit;
         }
 
-        $sql = "INSERT INTO users (name, gender, email, phone, guardian_phone, guardian_phone, company, section) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        // check if there is image attached then process image upload
+
+        $sql = "INSERT INTO users (name, gender, email, phone, guardian_name, guardian_phone, company, section) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $users = (new UserModel())->insert($sql, $payload);
         http_response_code(201);
         $res = [
