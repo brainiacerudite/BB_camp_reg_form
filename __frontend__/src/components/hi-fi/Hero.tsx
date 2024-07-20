@@ -9,7 +9,7 @@ function Hero() {
       style={{ backgroundImage: `url(${images.heroBgImage.src})` }}
       className="w-full min-h-screen relative bg-cover bg-center py-20 px-4"
     >
-      <div className="max-w-[499px] m-auto flex flex-col gap-12 justify-center items-center px-4 py-12 border border-borderColor rounded-3xl bg-bgGlassMorphism">
+      <div className="max-w-[499px] m-auto flex flex-col gap-12 justify-center items-center px-4 py-12 border-gradient rounded-2xl bg-bgGlassMorphism">
         <div className="flex flex-col justify-center items-center gap-4">
           <Anchor />
           <h4 className="text-2xl text-center text-white font-bold">

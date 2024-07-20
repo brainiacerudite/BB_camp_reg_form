@@ -12,7 +12,7 @@ const LinkOutlineButton = ({ type, text, to }: LinkOutlineButtonProps) => {
       <Link to={to}>
         <button
           type={type}
-          className="w-full max-w-[360px] text-white font-bold py-4 px-6 border border-borderColor rounded-lg bg-transparent"
+          className="w-full max-w-[360px] text-white font-bold py-4 px-6 border-gradient rounded-lg bg-transparent before:!rounded-lg before:!p-[1px]"
         >
           {text}
         </button>

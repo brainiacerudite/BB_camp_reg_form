@@ -9,5 +9,5 @@
 .border-gradient::before {
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask-composite: exclude;
-  @apply content-[""] rounded-2xl p-[1.5px] inset-0 absolute bg-gradient-to-br from-borderScale-1 to-borderScale-2;
+  @apply content-[""] rounded-2xl p-[2px] inset-0 absolute bg-gradient-to-br from-borderScale-1 to-borderScale-2;
 }
