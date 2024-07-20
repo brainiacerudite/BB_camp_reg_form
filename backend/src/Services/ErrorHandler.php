@@ -28,7 +28,7 @@ class ErrorHandler
             error_log("Exception: " . $e->getMessage() . " in " . $e->getFile() . " on line " . $e->getLine());
 
             // send response with err code and message
-            $statusCode = $e->getCode() ?: 500;
+            $statusCode = $e->getCode() && is_int($e->getCode()) ?: 500;
             http_response_code($statusCode);
             $res = [
                 'error' => [

@@ -16,8 +16,9 @@ class Controller
         $sanitizedData = [];
 
         foreach ($data as $key => &$value) {
-            $value = htmlspecialchars($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
             $value = trim($value);
+            $value = stripcslashes($value);
+            $value = htmlspecialchars($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
             $sanitizedData[$key] = $value;
         }
 

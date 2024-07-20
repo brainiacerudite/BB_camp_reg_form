@@ -3,7 +3,7 @@
 $config = [
     'app' => [
         'name' => $_ENV['APP_NAME'] ?? 'BB FORM',
-        'url' => $_ENV['APP_URL'] ?? null
+        'url' => $_ENV['APP_URL'] ?? $_SERVER['DOCUMENT_ROOT']
     ],
 
     'db' => [
