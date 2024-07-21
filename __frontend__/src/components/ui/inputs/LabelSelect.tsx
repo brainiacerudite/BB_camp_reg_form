@@ -23,8 +23,11 @@ const LabelSelect = ({
   handleSelectChange,
 }: LabelSelectProps) => {
   return (
-    <div>
-      <label htmlFor={id} className="text-lg font-medium lg:text-xl block text-white mb-2">
+    <div className="relative">
+      <label
+        htmlFor={id}
+        className="text-lg font-medium lg:text-xl block text-white mb-2"
+      >
         {label}
       </label>
       <select

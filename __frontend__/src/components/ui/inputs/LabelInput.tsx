@@ -22,8 +22,11 @@ const LabelInput = ({
   onChange,
 }: LabelInputProps) => {
   return (
-    <div>
-      <label htmlFor={id} className="text-lg font-medium lg:text-xl block text-white mb-2">
+    <div className="relative">
+      <label
+        htmlFor={id}
+        className="text-lg font-medium lg:text-xl block text-white mb-2"
+      >
         {label}
       </label>
       <input
