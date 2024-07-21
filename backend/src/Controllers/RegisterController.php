@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\UserModel;
 use App\Services\RequestHandler;
+use App\Services\ResponseHandler;
 
 class RegisterController extends Controller
 {
@@ -41,22 +42,14 @@ class RegisterController extends Controller
 
         // check if there is errors and return 422
         if (!empty($errors)) {
-            http_response_code(422);
-            $res = [
-                'error' => [
-                    'code' => 422,
-                    'message' => "Validation error",
-                    'errors' => (object) $errors
-                ]
-            ];
-            echo json_encode($res);
-            exit;
+            return ResponseHandler::json([
+                'status' => 'error',
+                'message' => 'Validation failed',
+                'errors' => (object) $errors
+            ], 422);
         }
 
         // save to db
-        // print_r($payload);
-        // exit;
-
         $sql = "INSERT INTO users (name, gender, email, phone, guardian_name, guardian_phone, company, section, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $userId = (new UserModel())->insert($sql, [
             $payload['name'],
@@ -69,28 +62,21 @@ class RegisterController extends Controller
             $payload['section'],
             $payload['image']
         ]);
-        http_response_code(201);
-        $res = [
-            'success' => [
-                'code' => 201,
-                'message' => 'Registered Successfully'
-            ]
-        ];
-        echo json_encode($res);
-        exit;
+
+        return ResponseHandler::json([
+            'status' => 'success',
+            'message' => 'Registered Successfully',
+        ], 201);
     }
 
     public function check()
     {
-        http_response_code(200);
-        $res = [
-            'success' => [
-                'code' => 200,
-                'message' => 'Successful'
-            ]
-        ];
-        echo json_encode($res);
-        exit;
+        $data = $_GET;
+
+        return ResponseHandler::json([
+            'status' => 'success',
+            'message' => 'Successful',
+            'data' => (object) $data
+        ], 200);
     }
 }
-;

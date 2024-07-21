@@ -25,6 +25,8 @@ $router->post('/register', ['App\Controllers\RegisterController', 'register']);
 $router->post('/check', ['App\Controllers\RegisterController', 'check']);
 
 // error_log("Actual Request URI: " . $_SERVER['REQUEST_URI']);
-$router->dispatch($_SERVER['REQUEST_URI']);
+// exclude query params from $_SERVER['REQUEST_URI']
+$uri = explode('?', $_SERVER['REQUEST_URI'])[0];
+$router->dispatch($uri);
 
 exit;
