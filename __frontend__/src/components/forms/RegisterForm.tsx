@@ -34,11 +34,11 @@ const RegisterForm = () => {
   return (
     <div className="w-full min-h-[100svh] relative bg-cover bg-center flex justify-center pt-20 px-4 bg-defaultBgImage">
       <div className="w-full text-center">
-        <div className="lg:inline-block lg:mx-auto">
+        <div className="md:inline-block md:mx-auto">
           <div className="px-8 py-16 border-gradient rounded-2xl bg-bgGlassMorphism backdrop-blur-sm lg:px-12">
             <form
               onSubmit={handleSubmit}
-              className="w-full flex items-center justify-center flex-col space-y-4 text-left lg:w-[488px] lg:space-y-8"
+              className="w-full flex items-center justify-center flex-col space-y-4 text-left md:w-[488px] lg:space-y-8"
             >
               <UploadImage image={image} setImage={setImage} />
               <div className="w-full space-y-4 lg:space-y-6">
