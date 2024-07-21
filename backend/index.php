@@ -22,7 +22,7 @@ $router = new Router();
 
 // Define routes
 $router->post('/register', ['App\Controllers\RegisterController', 'register']);
-$router->post('/check', ['App\Controllers\RegisterController', 'check']);
+$router->get('/check', ['App\Controllers\RegisterController', 'check']);
 
 // error_log("Actual Request URI: " . $_SERVER['REQUEST_URI']);
 // exclude query params from $_SERVER['REQUEST_URI']

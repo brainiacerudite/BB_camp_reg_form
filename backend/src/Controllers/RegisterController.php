@@ -54,13 +54,13 @@ class RegisterController extends Controller
         $userId = (new UserModel())->insert($sql, [
             $payload['name'],
             $payload['gender'],
-            $payload['email'],
-            $payload['phone'],
-            $payload['guardian_name'],
-            $payload['guardian_phone'],
+            $payload['email'] ?? null,
+            $payload['phone'] ?? null,
+            $payload['guardian_name'] ?? null,
+            $payload['guardian_phone'] ?? null,
             $payload['company'],
             $payload['section'],
-            $payload['image']
+            $payload['image'] ?? null
         ]);
 
         return ResponseHandler::json([
@@ -71,12 +71,60 @@ class RegisterController extends Controller
 
     public function check()
     {
-        $data = $_GET;
+        $payload = $_GET;
+        $payload = self::sanitizeInput($payload);
+
+        // Check if query fields are set
+        $queryFields = ['name', 'email', 'phone', 'guardian_name', 'guardian_phone', 'company', 'section'];
+        foreach ($queryFields as $field) {
+            if (!isset($payload[$field])) {
+                $payload[$field] = null;
+            }
+        }
+
+        // sql query to search for data with name or like
+        $sql = "SELECT * FROM users WHERE name = ? LIMIT 1";
+        $data = (new UserModel())->select($sql, [
+            $payload['name'],
+        ]);
 
         return ResponseHandler::json([
             'status' => 'success',
             'message' => 'Successful',
-            'data' => (object) $data
+            'data' => (object) $data,
+        ], 200);
+    }
+
+    public function panellistSearch()
+    {
+        $payload = $_GET;
+        $payload = self::sanitizeInput($payload);
+
+        // Check if query fields are set
+        $queryFields = ['name', 'email', 'phone', 'guardian_name', 'guardian_phone', 'company', 'section'];
+        foreach ($queryFields as $field) {
+            if (!isset($payload[$field])) {
+                $payload[$field] = null;
+            }
+        }
+
+        // sql query to search for data with name or like
+        $sql = "SELECT * FROM users WHERE name LIKE ? OR email LIKE ? OR phone LIKE ? OR guardian_name LIKE ? OR guardian_phone LIKE ? OR company LIKE ? OR section LIKE ? ORDER BY id DESC";
+        $data = (new UserModel())->select($sql, [
+            '%' . $payload['name'] . '%',
+            '%' . $payload['email'] . '%',
+            '%' . $payload['phone'] . '%',
+            '%' . $payload['guardian_name'] . '%',
+            '%' . $payload['guardian_phone'] . '%',
+            '%' . $payload['company'] . '%',
+            '%' . $payload['section'] . '%'
+        ]);
+
+        return ResponseHandler::json([
+            'status' => 'success',
+            'message' => 'Successful',
+            'count' => (int) count($data),
+            'data' => (object) $data,
         ], 200);
     }
 }
