@@ -50,7 +50,7 @@ const UploadImage = ({ image, setImage }: UploadImageProps) => {
       <img
         src={image || images.avatar.src}
         alt={images.avatar.alt}
-        className="w-20 h-20 object-cover border border-white rounded-full cursor-pointer"
+        className="w-24 h-24 object-cover border border-white rounded-full cursor-pointer"
         onClick={handleDefaultImageClick}
       />
       <span

@@ -25,7 +25,7 @@ const LabelInput = ({
     <div className="relative">
       <label
         htmlFor={id}
-        className="text-lg font-medium lg:text-xl block text-white mb-2"
+        className="text-sm font-normal block text-white mb-1 ml-1 lg:text-base"
       >
         {label}
       </label>
@@ -37,7 +37,7 @@ const LabelInput = ({
         placeholder={placeholder}
         value={value}
         onChange={onChange}
-        className="w-full p-4 rounded-lg outline-none bg-inputBgColor text-white placeholder:text-placeholderColor"
+        className="w-full p-4 text-sm rounded-lg outline-none bg-inputBgColor text-white placeholder:text-placeholderColor"
       />
     </div>
   );
