@@ -1,5 +1,6 @@
 import BbAnchor from "../assets/images/boys-brigade-anchor.png";
 import HeroBgImage from "../assets/images/hero-bg-image.png";
+import Avatar from "../assets/images/dp.png";
 
 export const bbAnchor = {
     src: BbAnchor,
@@ -11,9 +12,15 @@ export const heroBgImage = {
     alt: "Hero Background Image",
 }
 
+export const avatar = {
+    src: Avatar,
+    alt: "Upload your picture",
+}
+
 const images = {
     bbAnchor,
-    heroBgImage
+    heroBgImage,
+    avatar
 }
 
 export default images

@@ -5,6 +5,8 @@ export default {
     extend: {
       colors: {
         bgGlassMorphism: "rgba(67, 67, 5, 0.28)",
+        inputBgColor: "rgba(0, 0, 0, 0.38)",
+        placeholderColor: "rgba(157, 157, 133, 0.4)",
         borderColor: "#FEFE007D",
         borderScale: {
           1: "rgba(254, 254, 0, 0.49)",
@@ -12,6 +14,7 @@ export default {
         },
       },
       backgroundImage: {
+        defaultBgImage: "url(src/assets/images/hero-bg-image.png)",
         btnGradientColor:
           "linear-gradient(to right bottom, rgba(254, 254, 0, 0.86), rgba(255, 61, 0, 0.46))",
       },
