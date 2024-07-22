@@ -46,12 +46,12 @@ const UploadImage = ({ image, setImage }: UploadImageProps) => {
         onChange={handleImageChange}
         ref={fileInputRef}
       />
-      <div className="border-gradient backdrop-blur-sm">
-        <div className="w-fit h-auto relative">
+      <div className="w-fit h-auto border-gradient before:!rounded-full p-0.5">
+        <div className="">
           <img
             src={image || images.avatar.src}
             alt={images.avatar.alt}
-            className="w-24 h-24 object-center object-cover rounded-full cursor-pointer"
+            className="relative w-24 h-24 object-center object-cover rounded-full cursor-pointer"
             onClick={handleDefaultImageClick}
           />
         </div>
@@ -63,7 +63,6 @@ const UploadImage = ({ image, setImage }: UploadImageProps) => {
         </span>
       </div>
     </div>
-    // </div>
   );
 };
 
