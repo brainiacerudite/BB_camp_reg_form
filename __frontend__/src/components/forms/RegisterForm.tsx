@@ -3,6 +3,7 @@ import useInput from "react-lite-input";
 import LabelInput from "../ui/inputs/LabelInput";
 import UploadImage from "../ui/inputs/UploadImage";
 import LabelSelect from "../ui/inputs/LabelSelect";
+import SolidButton from "../ui/buttons/SolidButton";
 
 const RegisterForm = () => {
   const [image, setImage] = useState<string | null>(null);
@@ -144,8 +145,8 @@ const RegisterForm = () => {
                   onChange={handleSectionChange}
                 />
               </div>
-              <div className="relative">
-                <button type="submit">Hi Love</button>
+              <div className="w-full relative">
+               <SolidButton type="submit" text="SUBMIT" />
               </div>
             </form>
           </div>
