@@ -1,4 +1,5 @@
 import { ChangeEvent } from "react";
+import { RiArrowDownSLine } from "react-icons/ri";
 
 interface LabelSelectProps {
   id: string;
@@ -44,6 +45,9 @@ const LabelSelect = ({
           </option>
         ))}
       </select>
+      <span className="absolute top-1/2 right-4 text-2xl text-white opacity-30">
+        <RiArrowDownSLine />
+      </span>
     </div>
   );
 };

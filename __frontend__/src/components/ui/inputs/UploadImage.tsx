@@ -38,7 +38,7 @@ const UploadImage = ({ image, setImage }: UploadImageProps) => {
   };
 
   return (
-    <div className="relative">
+    <div className="">
       <input
         type="file"
         id="imageInput"
@@ -46,20 +46,24 @@ const UploadImage = ({ image, setImage }: UploadImageProps) => {
         onChange={handleImageChange}
         ref={fileInputRef}
       />
-
-      <img
-        src={image || images.avatar.src}
-        alt={images.avatar.alt}
-        className="w-24 h-24 object-cover border border-white rounded-full cursor-pointer"
-        onClick={handleDefaultImageClick}
-      />
-      <span
-        className="absolute right-0 bottom-0 text-2xl font-bold text-white opacity-80 cursor-pointer"
-        onClick={handleDefaultImageClick}
-      >
-        <IoCloudUploadSharp />
-      </span>
+      <div className="border-gradient backdrop-blur-sm">
+        <div className="w-fit h-auto relative">
+          <img
+            src={image || images.avatar.src}
+            alt={images.avatar.alt}
+            className="w-24 h-24 object-center object-cover rounded-full cursor-pointer"
+            onClick={handleDefaultImageClick}
+          />
+        </div>
+        <span
+          className="absolute right-0 bottom-0 text-2xl font-bold text-white opacity-80 cursor-pointer"
+          onClick={handleDefaultImageClick}
+        >
+          <IoCloudUploadSharp />
+        </span>
+      </div>
     </div>
+    // </div>
   );
 };
 
