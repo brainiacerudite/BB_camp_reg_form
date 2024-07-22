@@ -6,24 +6,52 @@ import LabelSelect from "../ui/inputs/LabelSelect";
 
 const RegisterForm = () => {
   const [image, setImage] = useState<string | null>(null);
+  const [companyOtherValue, setCompanyOtherValue] = useState("");
 
-  const [selectedOption, setSelectedOption] = useState("");
   const initValues = {
     name: "",
     email: "",
-    description: "",
   };
-
   const { values, handleLiteChange } = useInput(initValues);
 
-  const options = [
+  const [selectedGender, setSelectedGender] = useState("");
+  const [selectedCompany, setSelectedCompany] = useState("");
+  const [selectedSection, setSelectedSection] = useState("");
+
+  const genderOptions = [
     { value: "Male", label: "Male" },
     { value: "Female", label: "Female" },
   ];
 
-  const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
+  const handleGenderChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value;
-    setSelectedOption(value);
+    setSelectedGender(value);
+  };
+
+  const companyOptions = [
+    { value: "Brainiacerudite", label: "Brainiacerudite" },
+    { value: "YourmixJNR", label: "YourmixJNR" },
+    { value: "Other", label: "Other" },
+  ];
+
+  const sectionOptions = [
+    { value: "FUTA", label: "FUTA" },
+    { value: "Akure", label: "Akure" },
+  ];
+
+  const handleCompanyChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    const value = event.target.value;
+    setSelectedCompany(value);
+  };
+
+  const handleCompanyOtherValue = (event: ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setCompanyOtherValue(value);
+  };
+
+  const handleSectionChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    const value = event.target.value;
+    setSelectedSection(value);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -55,10 +83,69 @@ const RegisterForm = () => {
                   id="gender"
                   name="gender"
                   label="Gender"
-                  options={options}
-                  selectedOption={selectedOption}
-                  handleSelectChange={handleSelectChange}
+                  options={genderOptions}
+                  selectedOption={selectedGender}
+                  onChange={handleGenderChange}
                 />
+                <LabelInput
+                  id="email"
+                  name="email"
+                  type="email"
+                  label="Email"
+                  placeholder="Email"
+                  value={values.email}
+                  onChange={handleLiteChange}
+                />
+                <LabelInput
+                  id="phone"
+                  name="phone"
+                  type="number"
+                  label="Your Phone Number"
+                  placeholder="Phone Number"
+                  value={values.name}
+                  onChange={handleLiteChange}
+                />
+                <LabelInput
+                  id="guardian"
+                  name="guardian"
+                  type="text"
+                  label="Your Guardian Name"
+                  placeholder="Guardian Name"
+                  value={values.name}
+                  onChange={handleLiteChange}
+                />
+                <LabelInput
+                  id="guardianNumber"
+                  name="guardianNumber"
+                  type="number"
+                  label="Your Guardian Phone Number"
+                  placeholder="Guardian Phone Number"
+                  value={values.name}
+                  onChange={handleLiteChange}
+                />
+                <LabelSelect
+                  id="company"
+                  name="company"
+                  label="Company"
+                  options={companyOptions}
+                  selectedOption={selectedCompany}
+                  onChange={handleCompanyChange}
+                  inputId="companyId"
+                  inputName="companyId"
+                  otherValue={companyOtherValue}
+                  inputChange={handleCompanyOtherValue}
+                />
+                <LabelSelect
+                  id="section"
+                  name="section"
+                  label="Section"
+                  options={sectionOptions}
+                  selectedOption={selectedSection}
+                  onChange={handleSectionChange}
+                />
+              </div>
+              <div className="relative">
+                <button type="submit">Hi Love</button>
               </div>
             </form>
           </div>

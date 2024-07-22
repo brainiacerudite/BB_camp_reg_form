@@ -1,5 +1,4 @@
-import { ChangeEvent } from "react";
-import { RiArrowDownSLine } from "react-icons/ri";
+import { useState, ChangeEvent } from "react";
 
 interface LabelSelectProps {
   id: string;
@@ -11,7 +10,11 @@ interface LabelSelectProps {
     label: string;
   }>;
   selectedOption: string;
-  handleSelectChange: (event: ChangeEvent<HTMLSelectElement>) => void;
+  onChange: (event: ChangeEvent<HTMLSelectElement>) => void;
+  inputId?: string;
+  inputName?: string;
+  otherValue?: string | number;
+  inputChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const LabelSelect = ({
@@ -21,8 +24,21 @@ const LabelSelect = ({
   required,
   options,
   selectedOption,
-  handleSelectChange,
+  onChange,
+  inputId,
+  inputName,
+  otherValue,
+  inputChange,
+  ...props
 }: LabelSelectProps) => {
+  const [showOtherInput, setShowOtherInput] = useState<boolean>(false);
+
+  const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    const value = event.target.value;
+    setShowOtherInput(value === "Other");
+    onChange(event);
+  };
+
   return (
     <div className="relative">
       <label
@@ -37,7 +53,7 @@ const LabelSelect = ({
         value={selectedOption}
         onChange={handleSelectChange}
         required={required}
-        className="w-full p-4 text-sm rounded-lg outline-none bg-inputBgColor text-white appearance-none"
+        className="w-full p-4 text-sm rounded-lg outline-none bg-inputBgColor text-white"
       >
         {options.map(({ value, label }, index) => (
           <option key={index} value={value}>
@@ -45,9 +61,22 @@ const LabelSelect = ({
           </option>
         ))}
       </select>
-      <span className="absolute top-1/2 right-4 text-2xl text-white opacity-30">
-        <RiArrowDownSLine />
-      </span>
+      {showOtherInput && (
+        <div className="relative flex items-center py-2 gap-2">
+          <label htmlFor={inputId} className="text-white">
+            Other:
+          </label>
+          <input
+            id={inputId}
+            name={inputName}
+            type="text"
+            value={otherValue}
+            onChange={inputChange}
+            className="w-full text-white border-b outline-none bg-transparent"
+            {...props}
+          />
+        </div>
+      )}
     </div>
   );
 };
