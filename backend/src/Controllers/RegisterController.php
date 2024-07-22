@@ -34,10 +34,11 @@ class RegisterController extends Controller
         // process image upload
         if (!empty($_FILES['image'])) {
             $image = RequestHandler::uploadImage($_FILES['image']);
-            if (!$image) {
-                $errors['image'] = 'Invalid image file';
+            if (!$image['status']) {
+                // $errors['image'] = 'Invalid image file';
+                $errors['image'] = $image['message'];
             }
-            $payload['image'] = $image;
+            $payload['image'] = $image['file'] ?? null;
         }
 
         // check if there is errors and return 422
