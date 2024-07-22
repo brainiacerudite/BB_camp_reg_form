@@ -26,7 +26,11 @@ function Hero() {
               </div>
 
               <div className="w-full mx-auto max-w-[360px] p-4 flex flex-col justify-center space-y-4 lg:w-[488px] lg:px-8 lg:py-8 lg:space-y-8 lg:h-96">
-                <LinkSolidButton to="/" text="REGISTER NOW" type="button" />
+                <LinkSolidButton
+                  to="/register"
+                  text="REGISTER NOW"
+                  type="button"
+                />
                 <LinkOutlineButton
                   to="/"
                   text="CHECK REG STATUS"
