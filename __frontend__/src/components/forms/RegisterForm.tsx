@@ -75,9 +75,8 @@ const RegisterForm = () => {
       selectedSection,
     };
     try {
-      const response = await apiClient.post("/", registrationData);
+      await apiClient.post("/", registrationData);
       return <SuccessMessage />
-      console.log(response);
     } catch (error) {
       console.log(error);
     }
