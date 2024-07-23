@@ -23,10 +23,11 @@ const RegisterForm = () => {
   const [selectedGender, setSelectedGender] = useState("");
   const [selectedCompany, setSelectedCompany] = useState("");
   const [selectedSection, setSelectedSection] = useState("");
+  const [showOtherInput, setShowOtherInput] = useState<boolean>(false);
 
   const genderOptions = [
-    { value: "Male", label: "Male" },
-    { value: "Female", label: "Female" },
+    { value: "male", label: "Male" },
+    { value: "female", label: "Female" },
   ];
 
   const handleGenderChange = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -37,7 +38,7 @@ const RegisterForm = () => {
   const companyOptions = [
     { value: "Brainiacerudite", label: "Brainiacerudite" },
     { value: "YourmixJNR", label: "YourmixJNR" },
-    { value: "Other", label: "Other" },
+    { value: "other", label: "Other" },
   ];
 
   const sectionOptions = [
@@ -53,6 +54,7 @@ const RegisterForm = () => {
   const handleCompanyChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value;
     setSelectedCompany(value);
+    setShowOtherInput(value === "other");
   };
 
   const handleCompanyOtherValue = (event: ChangeEvent<HTMLInputElement>) => {
@@ -71,7 +73,8 @@ const RegisterForm = () => {
       image,
       ...values,
       gender: selectedGender,
-      company: selectedCompany,
+      company:
+        selectedCompany === "other" ? companyOtherValue : selectedCompany,
       section: selectedSection,
     };
     try {
@@ -99,6 +102,7 @@ const RegisterForm = () => {
                   type="text"
                   label="Your Full Name"
                   placeholder="Name"
+                  required
                   value={values.name}
                   onChange={handleLiteChange}
                 />
@@ -106,6 +110,7 @@ const RegisterForm = () => {
                   id="gender"
                   name="gender"
                   label="Gender"
+                  required
                   options={genderOptions}
                   selectedOption={selectedGender}
                   onChange={handleGenderChange}
@@ -150,18 +155,28 @@ const RegisterForm = () => {
                   id="company"
                   name="company"
                   label="Company"
+                  required
                   options={companyOptions}
                   selectedOption={selectedCompany}
                   onChange={handleCompanyChange}
-                  inputId="companyId"
-                  inputName="companyId"
-                  otherValue={companyOtherValue}
-                  inputChange={handleCompanyOtherValue}
                 />
+                {showOtherInput && (
+                  <LabelInput
+                    id="other_company"
+                    name="other_company"
+                    type="text"
+                    label="Your Church Name"
+                    placeholder="Church Name"
+                    required
+                    value={values.companyOtherValue}
+                    onChange={handleCompanyOtherValue}
+                  />
+                )}
                 <LabelSelect
                   id="section"
                   name="section"
                   label="Section"
+                  required
                   options={sectionOptions}
                   selectedOption={selectedSection}
                   onChange={handleSectionChange}

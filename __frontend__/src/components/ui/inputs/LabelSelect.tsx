@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from "react";
+import { ChangeEvent } from "react";
 
 interface LabelSelectProps {
   id: string;
@@ -25,17 +25,9 @@ const LabelSelect = ({
   options,
   selectedOption,
   onChange,
-  inputId,
-  inputName,
-  otherValue,
-  inputChange,
-  ...props
 }: LabelSelectProps) => {
-  const [showOtherInput, setShowOtherInput] = useState<boolean>(false);
-
   const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    const value = event.target.value;
-    setShowOtherInput(value === "Other");
+    // const value = event.target.value;
     onChange(event);
   };
 
@@ -61,22 +53,6 @@ const LabelSelect = ({
           </option>
         ))}
       </select>
-      {showOtherInput && (
-        <div className="relative flex items-center py-2 gap-2">
-          <label htmlFor={inputId} className="text-white">
-            Other:
-          </label>
-          <input
-            id={inputId}
-            name={inputName}
-            type="text"
-            value={otherValue}
-            onChange={inputChange}
-            className="w-full text-white border-b outline-none bg-transparent"
-            {...props}
-          />
-        </div>
-      )}
     </div>
   );
 };
