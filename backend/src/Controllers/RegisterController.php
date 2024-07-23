@@ -32,10 +32,18 @@ class RegisterController extends Controller
         }
 
         // process image upload
-        if (!empty($_FILES['image'])) {
+        if (isset($_FILES['image']) && !empty($_FILES['image'])) {
             $image = RequestHandler::uploadImage($_FILES['image']);
             if (!$image['status']) {
                 // $errors['image'] = 'Invalid image file';
+                $errors['image'] = $image['message'];
+            }
+            $payload['image'] = $image['file'] ?? null;
+        }
+
+        if (isset($payload['image']) && !empty($payload['image'])) {
+            $image = RequestHandler::uploadBase64Image($payload['image']);
+            if (!$image['status']) {
                 $errors['image'] = $image['message'];
             }
             $payload['image'] = $image['file'] ?? null;

@@ -15,8 +15,8 @@ const RegisterForm = () => {
     name: "",
     email: "",
     phone: "",
-    guardian: "",
-    guardianNumber: "",
+    guardian_name: "",
+    guardian_number: "",
   };
   const { values, handleLiteChange } = useInput(initialValues);
 
@@ -70,13 +70,13 @@ const RegisterForm = () => {
     const registrationData = {
       image,
       ...values,
-      selectedGender,
-      selectedCompany,
-      selectedSection,
+      gender: selectedGender,
+      company: selectedCompany,
+      section: selectedSection,
     };
     try {
-      await apiClient.post("/", registrationData);
-      return <SuccessMessage />
+      await apiClient.post("/register", registrationData);
+      return <SuccessMessage />;
     } catch (error) {
       console.log(error);
     }
@@ -129,21 +129,21 @@ const RegisterForm = () => {
                   onChange={handleLiteChange}
                 />
                 <LabelInput
-                  id="guardian"
-                  name="guardian"
+                  id="guardian_name"
+                  name="guardian_name"
                   type="text"
                   label="Your Guardian Name"
                   placeholder="Guardian Name"
-                  value={values.guardian}
+                  value={values.guardian_name}
                   onChange={handleLiteChange}
                 />
                 <LabelInput
-                  id="guardianNumber"
-                  name="guardianNumber"
+                  id="guardian_number"
+                  name="guardian_number"
                   type="number"
                   label="Your Guardian Phone Number"
                   placeholder="Guardian Phone Number"
-                  value={values.guardianNumber}
+                  value={values.guardian_number}
                   onChange={handleLiteChange}
                 />
                 <LabelSelect
