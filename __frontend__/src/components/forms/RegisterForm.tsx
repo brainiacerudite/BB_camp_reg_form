@@ -42,6 +42,7 @@ const RegisterForm = () => {
     { value: "company", label: "Company Section" },
     { value: "senior", label: "Senior Section" },
     { value: "officer", label: "Officer" },
+    { value: "newmember", label: "New Member" },
   ];
 
   const handleCompanyChange = (event: ChangeEvent<HTMLSelectElement>) => {
