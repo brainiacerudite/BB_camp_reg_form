@@ -1,5 +1,6 @@
 import images from "../../constants/images";
-import SolidButton from "../ui/buttons/SolidButton";
+import LinkSolidButton from "../ui/buttons/LinkSolidButton";
+// import SolidButton from "../ui/buttons/SolidButton";
 
 const SuccessMessage = () => {
   return (
@@ -17,7 +18,7 @@ const SuccessMessage = () => {
                   Registration completed
                 </p>
               </div>
-              <SolidButton text="CONTINUE" type="button" />
+              <LinkSolidButton to="/" text="CONTINUE" type="button" />
             </div>
           </div>
         </div>

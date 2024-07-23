@@ -4,16 +4,21 @@ import LabelInput from "../ui/inputs/LabelInput";
 import UploadImage from "../ui/inputs/UploadImage";
 import LabelSelect from "../ui/inputs/LabelSelect";
 import SolidButton from "../ui/buttons/SolidButton";
+import apiClient from "../../libs/apiClient";
+import SuccessMessage from "../hi-fi/SuccessMessage";
 
 const RegisterForm = () => {
   const [image, setImage] = useState<string | null>(null);
   const [companyOtherValue, setCompanyOtherValue] = useState("");
 
-  const initValues = {
+  const initialValues = {
     name: "",
     email: "",
+    phone: "",
+    guardian: "",
+    guardianNumber: "",
   };
-  const { values, handleLiteChange } = useInput(initValues);
+  const { values, handleLiteChange } = useInput(initialValues);
 
   const [selectedGender, setSelectedGender] = useState("");
   const [selectedCompany, setSelectedCompany] = useState("");
@@ -55,9 +60,22 @@ const RegisterForm = () => {
     setSelectedSection(value);
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(image);
+    const registrationData = {
+      image,
+      ...values,
+      selectedGender,
+      selectedCompany,
+      selectedSection,
+    };
+    try {
+      const response = await apiClient.post("/", registrationData);
+      return <SuccessMessage />
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -103,7 +121,7 @@ const RegisterForm = () => {
                   type="number"
                   label="Your Phone Number"
                   placeholder="Phone Number"
-                  value={values.name}
+                  value={values.number}
                   onChange={handleLiteChange}
                 />
                 <LabelInput
@@ -112,7 +130,7 @@ const RegisterForm = () => {
                   type="text"
                   label="Your Guardian Name"
                   placeholder="Guardian Name"
-                  value={values.name}
+                  value={values.guardian}
                   onChange={handleLiteChange}
                 />
                 <LabelInput
@@ -121,7 +139,7 @@ const RegisterForm = () => {
                   type="number"
                   label="Your Guardian Phone Number"
                   placeholder="Guardian Phone Number"
-                  value={values.name}
+                  value={values.guardianNumber}
                   onChange={handleLiteChange}
                 />
                 <LabelSelect
@@ -146,7 +164,7 @@ const RegisterForm = () => {
                 />
               </div>
               <div className="w-full relative">
-               <SolidButton type="submit" text="SUBMIT" />
+                <SolidButton type="submit" text="SUBMIT" />
               </div>
             </form>
           </div>

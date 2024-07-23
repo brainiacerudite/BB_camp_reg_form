@@ -6,7 +6,7 @@ interface LabelInputProps {
   required?: boolean;
   type: string;
   placeholder: string;
-  value: string | number | readonly string[];
+  value: string | number ;
   label: string;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }

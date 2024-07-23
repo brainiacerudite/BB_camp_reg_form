@@ -8,32 +8,38 @@ interface UploadImageProps {
 }
 
 const UploadImage = ({ image, setImage }: UploadImageProps) => {
-  //   const [image, setImage] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // Function to handle when a file is selected
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedImage = event.target.files ? event.target.files[0] : null;
+    const selectedFile = event.target.files?.[0];
 
-    if (selectedImage) {
-      // Validate selected file type
-      if (!selectedImage.type.startsWith("image/")) {
-        console.error("Invalid file type. Please select an image.");
+    if (!selectedFile) {
+      return; // Handle no file selected case
+    }
+
+    if (!selectedFile.type.startsWith("image/")) {
+      console.error("Invalid file type. Please select an image.");
+      return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = (e: ProgressEvent<FileReader>) => {
+      if (!e.target?.result) {
+        console.error("Error reading image file.");
         return;
       }
 
-      try {
-        setImage(URL.createObjectURL(selectedImage));
-      } catch (error) {
-        console.error("Error creating image URL:", error);
-      }
-    }
+      const imageDataUrl = e.target.result as string;
+
+      // Update state with the image data URL
+      setImage(imageDataUrl);
+    };
+
+    reader.readAsDataURL(selectedFile);
   };
 
-  const fileInputRef = useRef<HTMLInputElement>(null);
-
-  // Function to handle when the default image is clicked
   const handleDefaultImageClick = () => {
-    // Trigger input file click event
     fileInputRef.current?.click();
   };
 

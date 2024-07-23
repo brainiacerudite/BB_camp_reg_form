@@ -8,7 +8,7 @@ interface LinkSolidButtonProps {
 
 const LinkSolidButton = ({ type, text, to }: LinkSolidButtonProps) => {
   return (
-    <div className="isolate">
+    <div className="w-full isolate">
       <Link to={to}>
         <button
           type={type}
