@@ -36,8 +36,12 @@ const RegisterForm = () => {
   ];
 
   const sectionOptions = [
-    { value: "FUTA", label: "FUTA" },
-    { value: "Akure", label: "Akure" },
+    { value: "", label: "Select Your Section" },
+    { value: "anchor", label: "Anchor Section" },
+    { value: "junior", label: "Junior Section" },
+    { value: "company", label: "Company Section" },
+    { value: "senior", label: "Senior Section" },
+    { value: "officer", label: "Officer" },
   ];
 
   const handleCompanyChange = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -146,7 +150,7 @@ const RegisterForm = () => {
                 />
               </div>
               <div className="w-full relative">
-               <SolidButton type="submit" text="SUBMIT" />
+                <SolidButton type="submit" text="SUBMIT" />
               </div>
             </form>
           </div>
