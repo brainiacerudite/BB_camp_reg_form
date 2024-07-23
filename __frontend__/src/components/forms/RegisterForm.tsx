@@ -26,8 +26,10 @@ const RegisterForm = () => {
   const [showOtherInput, setShowOtherInput] = useState<boolean>(false);
 
   const genderOptions = [
+    { value: "", label: "Select Your Gender" },
     { value: "male", label: "Male" },
     { value: "female", label: "Female" },
+    { value: "other", label: "Other" },
   ];
 
   const handleGenderChange = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -36,8 +38,56 @@ const RegisterForm = () => {
   };
 
   const companyOptions = [
-    { value: "Brainiacerudite", label: "Brainiacerudite" },
-    { value: "YourmixJNR", label: "YourmixJNR" },
+    { value: "", label: "Select Company / Church" },
+    {
+      value: "1st",
+      label: "1st Ogbomoso Coy St. David Anglican Church, Agbonin",
+    },
+    {
+      value: "4th",
+      label: "4th Ogbomoso Coy St. Stephen Anglican Church, Isale-Alasa",
+    },
+    {
+      value: "14th",
+      label: "14th Ogbomoso Coy St. Michael Anglican Church, Ayegun",
+    },
+    {
+      value: "16th",
+      label: "16th Ogbomoso Coy Salvation Anglican Church, Papa Adeyemo",
+    },
+    {
+      value: "17th",
+      label: "17th Ogbomoso Coy Christ Anglican Church, Kajola",
+    },
+    {
+      value: "30th",
+      label: "30th Ogbomoso Coy All Saints Anglican Church, Apake",
+    },
+    {
+      value: "32nd",
+      label: "32nd Ogbomoso Coy St. Paul Anglican Church, Iresaapa",
+    },
+    {
+      value: "41st",
+      label: "41st Ogbomoso Coy St. Peter Anglican Church, Randa",
+    },
+    { value: "church=messiah", label: "Messiah Anglican Church, Owode" },
+    {
+      value: "church=ascension",
+      label: "Anglican Church of Ascension, Oke Anu",
+    },
+    {
+      value: "prosp=allsouls",
+      label: "All Souls Anglican Church, Isale General",
+    },
+    { value: "prosp=stjohn", label: "St John Anglican Church, Pooro" },
+    { value: "prosp=mercyseat", label: "Mercy Seat Anglican Church, Abaa " },
+    { value: "prosp=ileewe", label: "Anglican Church, Ile Ewe" },
+    { value: "prosp=emmanuel", label: "Emmanuel Anglican Church" },
+    { value: "prosp=stpeter", label: "St. Peter Anglican Church, Pontela" },
+    { value: "prosp=trinity", label: "Trinity Anglican Church, Oke Owode" },
+    { value: "prosp=stpaul", label: "St. Paul Anglican Church, Iresaadu" },
+    { value: "prosp=advent", label: "Advent Anglican Church, Molete" },
     { value: "other", label: "Other" },
   ];
 
@@ -74,7 +124,9 @@ const RegisterForm = () => {
       ...values,
       gender: selectedGender,
       company:
-        selectedCompany === "other" ? companyOtherValue : selectedCompany,
+        selectedCompany === "other"
+          ? `church=${companyOtherValue}`
+          : selectedCompany,
       section: selectedSection,
     };
     try {
