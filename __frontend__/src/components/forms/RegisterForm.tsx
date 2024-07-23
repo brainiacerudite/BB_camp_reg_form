@@ -41,8 +41,13 @@ const RegisterForm = () => {
   ];
 
   const sectionOptions = [
-    { value: "FUTA", label: "FUTA" },
-    { value: "Akure", label: "Akure" },
+    { value: "", label: "Select Your Section" },
+    { value: "anchor", label: "Anchor Section" },
+    { value: "junior", label: "Junior Section" },
+    { value: "company", label: "Company Section" },
+    { value: "senior", label: "Senior Section" },
+    { value: "officer", label: "Officer" },
+    { value: "newmember", label: "New Member" },
   ];
 
   const handleCompanyChange = (event: ChangeEvent<HTMLSelectElement>) => {

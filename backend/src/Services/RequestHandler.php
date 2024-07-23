@@ -45,7 +45,7 @@ class RequestHandler
 
         // no error
         $file_name = uniqid('', true) . '.' . $file_ext;
-        $file_destination = "uploads/{$file_name}";
+        $file_destination = "/uploads/{$file_name}";
         move_uploaded_file($file_tmp, $_SERVER['DOCUMENT_ROOT'] . $file_destination);
         return [
             'status' => true,
