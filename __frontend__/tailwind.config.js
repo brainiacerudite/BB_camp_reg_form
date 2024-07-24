@@ -14,7 +14,7 @@ export default {
         },
       },
       backgroundImage: {
-        defaultBgImage: "url(src/assets/images/hero-bg-image.png)",
+        defaultBgImage: "url(assets/images/hero-bg-image.png)",
         btnGradientColor:
           "linear-gradient(to right bottom, rgba(254, 254, 0, 0.86), rgba(255, 61, 0, 0.46))",
       },
