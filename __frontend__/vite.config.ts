@@ -1,7 +1,11 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react-swc'
+// vite.config.ts
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react-swc';
 
-// https://vitejs.dev/config/
+// Accessing the environment variable using process.env
+const baseUrl = process.env.VITE_BASE_URL;
+
 export default defineConfig({
+  base: baseUrl,
   plugins: [react()],
-})
+});
