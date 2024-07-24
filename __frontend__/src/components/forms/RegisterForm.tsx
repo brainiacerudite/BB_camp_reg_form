@@ -138,7 +138,7 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className="w-full min-h-[100svh] relative bg-cover bg-center flex justify-center pt-20 px-4 bg-defaultBgImage">
+    <div className="w-full min-h-[100svh] relative bg-cover bg-center flex justify-center py-20 px-4 bg-defaultBgImage">
       <div className="w-full text-center">
         <div className="md:inline-block md:mx-auto">
           <div className="px-8 py-16 border-gradient rounded-2xl bg-bgGlassMorphism backdrop-blur-sm lg:px-12">

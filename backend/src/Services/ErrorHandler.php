@@ -13,10 +13,12 @@ class ErrorHandler
             error_log("Error: [$errno] $errstr in $errfile on line $errline");
 
             // Send a response with error code and message
+            $statusCode = $errno && is_int($errno) ? $errno : 500;
+
             return ResponseHandler::json([
                 'status' => 'error',
                 'message' => $errstr,
-            ], $errno);
+            ], $statusCode);
         });
 
         // global exception handler
