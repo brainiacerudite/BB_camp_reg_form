@@ -24,6 +24,7 @@ const RegisterForm = () => {
   const [selectedCompany, setSelectedCompany] = useState("");
   const [selectedSection, setSelectedSection] = useState("");
   const [showOtherInput, setShowOtherInput] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const genderOptions = [
     { value: "", label: "Select Your Gender" },
@@ -80,7 +81,7 @@ const RegisterForm = () => {
       value: "prosp=allsouls",
       label: "All Souls Anglican Church, Isale General",
     },
-    { value: "prosp=stjohn", label: "St John Anglican Church, Pooro" },
+    { value: "prosp=standrew", label: "St Andrew Anglican Church, Pooro" },
     { value: "prosp=mercyseat", label: "Mercy Seat Anglican Church, Abaa " },
     { value: "prosp=ileewe", label: "Anglican Church, Ile Ewe" },
     { value: "prosp=emmanuel", label: "Emmanuel Anglican Church" },
@@ -97,7 +98,6 @@ const RegisterForm = () => {
     { value: "junior", label: "Junior Section" },
     { value: "company", label: "Company Section" },
     { value: "senior", label: "Senior Section" },
-    { value: "officer", label: "Officer" },
     { value: "newmember", label: "New Member" },
   ];
 
@@ -130,10 +130,13 @@ const RegisterForm = () => {
       section: selectedSection,
     };
     try {
+      setIsLoading(true);
       await apiClient.post("/register", registrationData);
       return <SuccessMessage />;
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -235,7 +238,7 @@ const RegisterForm = () => {
                 />
               </div>
               <div className="w-full relative">
-                <SolidButton type="submit" text="SUBMIT" />
+                <SolidButton type="submit" text="SUBMIT" disabled={isLoading} />
               </div>
             </form>
           </div>
