@@ -10,6 +10,7 @@ import SuccessMessage from "../hi-fi/SuccessMessage";
 const RegisterForm = () => {
   const [image, setImage] = useState<string | null>(null);
   const [companyOtherValue, setCompanyOtherValue] = useState("");
+  const [success, setSuccess] = useState<boolean>(false);
 
   const initialValues = {
     name: "",
@@ -131,14 +132,17 @@ const RegisterForm = () => {
     };
     try {
       setIsLoading(true);
-      await apiClient.post("/register", registrationData);
-      return <SuccessMessage />;
+      const res = await apiClient.post("/register", registrationData);
+      if (res) setSuccess(true);
+      // return <SuccessMessage />;
     } catch (error) {
       console.log(error);
     } finally {
       setIsLoading(false);
     }
   };
+
+  if (success) return <SuccessMessage />;
 
   return (
     <div className="w-full min-h-[100svh] relative bg-cover bg-center flex justify-center pt-20 pb-16 px-4 bg-defaultBgImage">
