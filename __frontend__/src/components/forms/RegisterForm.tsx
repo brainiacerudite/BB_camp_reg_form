@@ -13,7 +13,9 @@ const RegisterForm = () => {
   const [success, setSuccess] = useState<boolean>(false);
 
   const initialValues = {
-    name: "",
+    surname: "",
+    firstname: "",
+    middlename: "",
     email: "",
     phone: "",
     guardian_name: "",
@@ -156,13 +158,32 @@ const RegisterForm = () => {
               <UploadImage image={image} setImage={setImage} />
               <div className="w-full space-y-4 lg:space-y-6">
                 <LabelInput
-                  id="name"
-                  name="name"
+                  id="surname"
+                  name="surname"
                   type="text"
-                  label="Your Full Name"
-                  placeholder="Name"
+                  label="Your Surname"
+                  placeholder="Surname"
                   required
-                  value={values.name}
+                  value={values.surname}
+                  onChange={handleLiteChange}
+                />
+                <LabelInput
+                  id="firstname"
+                  name="firstname"
+                  type="text"
+                  label="Your First Name"
+                  placeholder="First Name"
+                  required
+                  value={values.firstname}
+                  onChange={handleLiteChange}
+                />
+                <LabelInput
+                  id="middlename"
+                  name="middlename"
+                  type="text"
+                  label="Your Middle Name"
+                  placeholder="Middle Name"
+                  value={values.middlename}
                   onChange={handleLiteChange}
                 />
                 <LabelSelect

@@ -14,7 +14,11 @@ const RootRouter = () => {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/register" element={<Register />} />
+        {/* <Route path="/reg-status" element={<RegStatus />} /> */}
         <Route path="/success" element={<Success />} />
+
+        {/* panel routes */}
+        {/* <Route path="/panel/list" element={<PanelList />} /> */}
       </Routes>
     </ScrollToTop>
   );
