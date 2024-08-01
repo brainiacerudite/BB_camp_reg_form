@@ -15,8 +15,12 @@ class RegisterController extends Controller
 
         // validate input data
         $errors = [];
-        if (empty($payload['name'])) {
-            $errors['name'] = 'Name field is required';
+        if (empty($payload['surname'])) {
+            $errors['surname'] = 'Surname field is required';
+        }
+        
+        if (empty($payload['firstname'])) {
+            $errors['firstname'] = 'First Name field is required';
         }
 
         if (empty($payload['gender'])) {
@@ -30,7 +34,18 @@ class RegisterController extends Controller
         if (empty($payload['section'])) {
             $errors['section'] = 'Section field is required';
         }
-
+        
+        // TODO: Check for duplicate surname and firstnsme
+        $checkDuplicateSql = "SELECT * WHERE surname = ? AND firstname = ? LIMIT 1";
+        $checkDuplicateResult = (new UserModel())->select($checkDuplicateSql, [
+            $payload['surname'],
+            $payload['firstnsme'],
+        ]);
+        
+        if(!empty($checkDuplicateResult)) {
+            $errors['surname'] = 'Name already exist';
+        }
+        
         // process image upload
         if (isset($_FILES['image']) && !empty($_FILES['image'])) {
             $image = RequestHandler::uploadImage($_FILES['image']);
@@ -84,7 +99,7 @@ class RegisterController extends Controller
         $payload = self::sanitizeInput($payload);
 
         // Check if query fields are set
-        $queryFields = ['name', 'email', 'phone', 'guardian_name', 'guardian_phone', 'company', 'section'];
+        $queryFields = ['surname', 'firstname'];
         foreach ($queryFields as $field) {
             if (!isset($payload[$field])) {
                 $payload[$field] = null;
@@ -92,15 +107,27 @@ class RegisterController extends Controller
         }
 
         // sql query to search for data with name or like
-        $sql = "SELECT * FROM users WHERE name = ? LIMIT 1";
+        $sql = "SELECT * FROM users WHERE surname LIKE ? AND firstname LIKE ? LIMIT 1";
         $data = (new UserModel())->select($sql, [
-            $payload['name'],
+            '%' . $payload['surname'] . '%',
+            '%' . $payload['firstname'] . '%',
         ]);
 
         return ResponseHandler::json([
             'status' => 'success',
             'message' => 'Successful',
             'data' => (object) $data,
+        ], 200);
+    }
+    
+    public function panellist()
+    {
+        $sql = "SELECT * FROM users";
+        $data = (new UserModel())->select($sql);
+        
+        return ResponseHandler::json([
+            'status' => 'success',
+            'count' => (int) count($data),
         ], 200);
     }
 
