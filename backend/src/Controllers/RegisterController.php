@@ -22,7 +22,7 @@ class RegisterController extends Controller
         if (empty($payload['surname'])) {
             $errors['surname'] = 'Surname field is required';
         }
-        
+
         if (empty($payload['firstname'])) {
             $errors['firstname'] = 'First Name field is required';
         }
@@ -38,18 +38,18 @@ class RegisterController extends Controller
         if (empty($payload['section'])) {
             $errors['section'] = 'Section field is required';
         }
-        
+
         // TODO: Check for duplicate surname and firstnsme
         $checkDuplicateSql = "SELECT * FROM users WHERE surname = ? AND firstname = ? LIMIT 1";
         $checkDuplicateResult = (new UserModel())->select($checkDuplicateSql, [
             $payload['surname'],
             $payload['firstname'],
         ]);
-        
+
         if(!empty($checkDuplicateResult)) {
             $errors['surname'] = 'Name already exist';
         }
-        
+
         // process image upload
         if (isset($_FILES['image']) && !empty($_FILES['image'])) {
             $image = RequestHandler::uploadImage($_FILES['image']);
@@ -90,11 +90,18 @@ class RegisterController extends Controller
             $payload['section'],
             $payload['image'] ?? null
         ]);
+        
+        // TODO: generate tag
 
         return ResponseHandler::json([
             'status' => 'success',
             'message' => 'Registered Successfully',
         ], 201);
+    }
+    
+    private function generateTag()
+    {
+        
     }
 
     public function check()
@@ -120,50 +127,6 @@ class RegisterController extends Controller
         return ResponseHandler::json([
             'status' => 'success',
             'message' => 'Successful',
-            'data' => (object) $data,
-        ], 200);
-    }
-    
-    public function panellist()
-    {
-        $sql = "SELECT * FROM users";
-        $data = (new UserModel())->select($sql);
-        
-        return ResponseHandler::json([
-            'status' => 'success',
-            'count' => (int) count($data),
-        ], 200);
-    }
-
-    public function panellistSearch()
-    {
-        $payload = $_GET;
-        $payload = self::sanitizeInput($payload);
-
-        // Check if query fields are set
-        $queryFields = ['name', 'email', 'phone', 'guardian_name', 'guardian_phone', 'company', 'section'];
-        foreach ($queryFields as $field) {
-            if (!isset($payload[$field])) {
-                $payload[$field] = null;
-            }
-        }
-
-        // sql query to search for data with name or like
-        $sql = "SELECT * FROM users WHERE name LIKE ? OR email LIKE ? OR phone LIKE ? OR guardian_name LIKE ? OR guardian_phone LIKE ? OR company LIKE ? OR section LIKE ? ORDER BY id DESC";
-        $data = (new UserModel())->select($sql, [
-            '%' . $payload['name'] . '%',
-            '%' . $payload['email'] . '%',
-            '%' . $payload['phone'] . '%',
-            '%' . $payload['guardian_name'] . '%',
-            '%' . $payload['guardian_phone'] . '%',
-            '%' . $payload['company'] . '%',
-            '%' . $payload['section'] . '%'
-        ]);
-
-        return ResponseHandler::json([
-            'status' => 'success',
-            'message' => 'Successful',
-            'count' => (int) count($data),
             'data' => (object) $data,
         ], 200);
     }
