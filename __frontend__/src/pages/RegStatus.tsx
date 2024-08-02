@@ -3,9 +3,17 @@ import LabelInput from "../components/ui/inputs/LabelInput";
 import SolidButton from "../components/ui/buttons/SolidButton";
 import useInput from "react-lite-input";
 import apiClient from "../libs/apiClient";
+import images from "../constants/images";
+import Spinner from "../components/Spinner";
 
 const RegStatus = () => {
   const [errors, setErrors] = useState<string | null>("");
+  // interface DataType {
+  //   id: number;
+  //   name: string;
+  //   image: string;
+  // }
+  // const [lists, setLists] = useState<DataType[] | null>([]);
 
   const initialValues = {
     surname: "",
@@ -65,6 +73,8 @@ const RegStatus = () => {
                   required
                   value={values.surname}
                   onChange={handleLiteChange}
+                  hasError={hasError("surname")}
+                  errorMessage={getError("surname")}
                 />
                 <LabelInput
                   id="firstname"
@@ -72,15 +82,40 @@ const RegStatus = () => {
                   type="text"
                   label="Your First Name"
                   placeholder="First Name"
-                  required
                   value={values.firstname}
                   onChange={handleLiteChange}
+                  hasError={hasError("firstname")}
+                  errorMessage={getError("firstname")}
                 />
               </div>
               <div className="w-full relative">
                 <SolidButton type="submit" text="SUBMIT" disabled={isLoading} />
               </div>
             </form>
+
+<div className="mt-16"></div>
+            <hr />
+            {/* <div className="h-43">
+              <Spinner className="!h-12 !w-12" />
+              </div> */}
+              <div className="mt-16"></div>
+            <div className="flex flex-col gap-4 md:flex-row flex-wrap">
+              {lists.map(({ id, name, image }) => {
+                return (
+                  <div
+                    key={id}
+                    className="w-full flex gap-4 p-4 bg-white border shadow-md rounded-lg md:basis-[300px] md:flex-shrink-0"
+                  >
+                    <div>
+                      <img src={image} alt={name} className="w-20" />
+                    </div>
+                    <div>
+                      <h4>{name}</h4>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
@@ -89,3 +124,22 @@ const RegStatus = () => {
 };
 
 export default RegStatus;
+
+interface DataType {
+  id: number;
+  name: string;
+  image: string;
+}
+
+const lists: DataType[] = [
+  {
+    id: 1,
+    name: "John Doe",
+    image: images.avatar.src,
+  },
+  {
+    id: 2,
+    name: "John Doe",
+    image: images.avatar.src,
+  },
+];

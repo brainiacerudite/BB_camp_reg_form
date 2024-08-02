@@ -118,7 +118,7 @@ class RegisterController extends Controller
         }
 
         // sql query to search for data with name or like
-        $sql = "SELECT * FROM users WHERE surname LIKE ? AND firstname LIKE ? LIMIT 1";
+        $sql = "SELECT * FROM users WHERE surname LIKE ? AND firstname LIKE ?";
         $data = (new UserModel())->select($sql, [
             '%' . $payload['surname'] . '%',
             '%' . $payload['firstname'] . '%',
@@ -130,4 +130,6 @@ class RegisterController extends Controller
             'data' => (object) $data,
         ], 200);
     }
+
+    
 }

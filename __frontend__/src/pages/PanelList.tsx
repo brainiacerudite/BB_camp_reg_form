@@ -33,14 +33,14 @@ const PanelList = () => {
         </div>
       </div>
       <div className="flex flex-col gap-4 md:flex-row flex-wrap">
-        {data.map(({ id, name, imageSrc, imageAlt }) => {
+        {data.map(({ id, name, image }) => {
           return (
             <div
               key={id}
-              className="w-full flex gap-4 p-4 bg-white border shadow-md rounded-lg md:basis-[300px] md:flex-shrink-0 "
+              className="w-full flex gap-4 p-4 bg-white border shadow-md rounded-lg md:basis-[300px] md:flex-shrink-0"
             >
               <div>
-                <img src={imageSrc} alt={imageAlt} className="w-20" />
+                <img src={image} alt={name} className="w-20" />
               </div>
               <div>
                 <h4>{name}</h4>
@@ -64,51 +64,43 @@ export default PanelList;
 interface DataType {
   id: number;
   name: string;
-  imageSrc: string;
-  imageAlt: string;
+  image: string;
 }
 
 const data: DataType[] = [
   {
     id: 1,
     name: "John Doe",
-    imageSrc: images.avatar.src,
-    imageAlt: images.avatar.alt,
+    image: images.avatar.src,
   },
   {
     id: 2,
     name: "John Doe",
-    imageSrc: images.avatar.src,
-    imageAlt: images.avatar.alt,
+    image: images.avatar.src,
   },
   {
     id: 3,
     name: "John Doe",
-    imageSrc: images.avatar.src,
-    imageAlt: images.avatar.alt,
+    image: images.avatar.src,
   },
   {
     id: 4,
     name: "John Doe",
-    imageSrc: images.avatar.src,
-    imageAlt: images.avatar.alt,
+    image: images.avatar.src,
   },
   {
     id: 5,
     name: "John Doe",
-    imageSrc: images.avatar.src,
-    imageAlt: images.avatar.alt,
+    image: images.avatar.src,
   },
   {
     id: 6,
     name: "John Doe",
-    imageSrc: images.avatar.src,
-    imageAlt: images.avatar.alt,
+    image: images.avatar.src,
   },
   {
     id: 7,
     name: "John Doe",
-    imageSrc: images.avatar.src,
-    imageAlt: images.avatar.alt,
+    image: images.avatar.src,
   },
 ];
