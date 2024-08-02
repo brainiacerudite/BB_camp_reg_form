@@ -32,7 +32,7 @@ function Hero() {
                   type="button"
                 />
                 <LinkOutlineButton
-                  to="/"
+                  to="/reg-status"
                   text="CHECK REG STATUS"
                   type="button"
                 />

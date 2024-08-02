@@ -17,14 +17,14 @@ const PanelList = () => {
   };
 
   return (
-    <div className="relative h-screen space-y-5 py-4 px-4 xl:px-40">
+    <div className="relative h-screen space-y-5 py-4 px-4 xl:px-40 bg-gray-50">
       <div className="flex gap-4 items-center">
         <div className="w-full p-1 border-gradient rounded-2xl backdrop-blur-sm">
           <input
             value={name}
             onChange={handleNameChange}
             type="text"
-            className="px-2 py-3 relative w-full text-base text-[#303030] placeholder:text-[#9D9D8566] rounded-lg outline-none"
+            className="px-2 py-3 relative w-full text-base bg-transparent text-[#303030] placeholder:text-[#9D9D8566] rounded-lg outline-none"
             placeholder="Name"
           />
         </div>
@@ -37,7 +37,7 @@ const PanelList = () => {
           return (
             <div
               key={id}
-              className="w-full flex gap-4 p-4 border shadow-md rounded-lg md:basis-[300px] md:flex-shrink-0 "
+              className="w-full flex gap-4 p-4 bg-white border shadow-md rounded-lg md:basis-[300px] md:flex-shrink-0 "
             >
               <div>
                 <img src={imageSrc} alt={imageAlt} className="w-20" />
@@ -50,7 +50,7 @@ const PanelList = () => {
         })}
       </div>
       <div
-        className="fixed bottom-1 right-2 cursor-pointer"
+        className="fixed bottom-8 right-8 cursor-pointer"
         onClick={handleAdd}
       >
         <AddBtn />
