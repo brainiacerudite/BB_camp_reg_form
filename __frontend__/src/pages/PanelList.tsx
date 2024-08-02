@@ -2,12 +2,20 @@ import { ChangeEvent, useState } from "react";
 import FilterList from "../assets/icons/filter_list.svg";
 import AddBtn from "../assets/icons/add-frame.svg";
 import images from "../constants/images";
+import { useNavigate } from "react-router-dom";
 
 const PanelList = () => {
   const [name, setName] = useState<string>("");
   const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
   };
+
+  const navigate = useNavigate();
+
+  const handleAdd = () => {
+    navigate("/register");
+  };
+
   return (
     <div className="relative h-screen space-y-5 py-4 px-4 xl:px-40">
       <div className="flex gap-4 items-center">
@@ -41,7 +49,10 @@ const PanelList = () => {
           );
         })}
       </div>
-      <div className="fixed bottom-1 right-2 cursor-pointer">
+      <div
+        className="fixed bottom-1 right-2 cursor-pointer"
+        onClick={handleAdd}
+      >
         <AddBtn />
       </div>
     </div>
