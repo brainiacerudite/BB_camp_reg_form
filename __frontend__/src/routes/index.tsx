@@ -7,6 +7,7 @@ import ScrollToTop from "./ScrollToTop";
 import Landing from "../pages/Landing";
 import Register from "../pages/Register";
 import Success from "../pages/Success";
+import PanelList from "../pages/PanelList";
 
 const RootRouter = () => {
   return (
@@ -18,7 +19,7 @@ const RootRouter = () => {
         <Route path="/success" element={<Success />} />
 
         {/* panel routes */}
-        {/* <Route path="/panel/list" element={<PanelList />} /> */}
+        <Route path="/panel/list" element={<PanelList />} />
       </Routes>
     </ScrollToTop>
   );

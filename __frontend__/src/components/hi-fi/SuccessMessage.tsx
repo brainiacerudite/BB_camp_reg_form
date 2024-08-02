@@ -1,6 +1,5 @@
 import images from "../../constants/images";
 import LinkSolidButton from "../ui/buttons/LinkSolidButton";
-// import SolidButton from "../ui/buttons/SolidButton";
 
 const SuccessMessage = () => {
   return (
