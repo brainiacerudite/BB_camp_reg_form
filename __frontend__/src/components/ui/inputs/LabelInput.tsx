@@ -6,9 +6,11 @@ interface LabelInputProps {
   required?: boolean;
   type: string;
   placeholder: string;
-  value: string | number ;
+  value: string | number;
   label: string;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  hasError?: boolean;
+  errorMessage?: string | null;
 }
 
 const LabelInput = ({
@@ -20,6 +22,8 @@ const LabelInput = ({
   value,
   label,
   onChange,
+  hasError,
+  errorMessage,
 }: LabelInputProps) => {
   return (
     <div className="relative">
@@ -39,6 +43,11 @@ const LabelInput = ({
         onChange={onChange}
         className="w-full p-4 text-sm rounded-lg outline-none bg-inputBgColor text-white placeholder:text-placeholderColor"
       />
+      {hasError && (
+        <span className="text-sm text-red-400 font-medium ml-2">
+          {errorMessage}
+        </span>
+      )}
     </div>
   );
 };

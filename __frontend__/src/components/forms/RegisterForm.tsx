@@ -173,7 +173,12 @@ const RegisterForm = () => {
               onSubmit={handleSubmit}
               className="w-full flex items-center justify-center flex-col space-y-4 text-left md:w-[488px] lg:space-y-8"
             >
-              <UploadImage image={image} setImage={setImage} />
+              <UploadImage
+                image={image}
+                setImage={setImage}
+                hasError={hasError("image")}
+                errorMessage={getError("image")}
+              />
               <div className="w-full space-y-4 lg:space-y-6">
                 <LabelInput
                   id="surname"
@@ -184,6 +189,8 @@ const RegisterForm = () => {
                   required
                   value={values.surname}
                   onChange={handleLiteChange}
+                  hasError={hasError("surname")}
+                  errorMessage={getError("surname")}
                 />
                 <LabelInput
                   id="firstname"
@@ -194,6 +201,8 @@ const RegisterForm = () => {
                   required
                   value={values.firstname}
                   onChange={handleLiteChange}
+                  hasError={hasError("firstname")}
+                  errorMessage={getError("firstname")}
                 />
                 <LabelInput
                   id="middlename"
@@ -203,6 +212,8 @@ const RegisterForm = () => {
                   placeholder="Middle Name"
                   value={values.middlename}
                   onChange={handleLiteChange}
+                  hasError={hasError("middlename")}
+                  errorMessage={getError("middlename")}
                 />
                 <LabelSelect
                   id="gender"
@@ -212,6 +223,8 @@ const RegisterForm = () => {
                   options={genderOptions}
                   selectedOption={selectedGender}
                   onChange={handleGenderChange}
+                  hasError={hasError("gender")}
+                  errorMessage={getError("gender")}
                 />
                 <LabelInput
                   id="email"
@@ -221,6 +234,8 @@ const RegisterForm = () => {
                   placeholder="Email"
                   value={values.email}
                   onChange={handleLiteChange}
+                  hasError={hasError("email")}
+                  errorMessage={getError("email")}
                 />
                 <LabelInput
                   id="phone"
@@ -230,6 +245,8 @@ const RegisterForm = () => {
                   placeholder="Phone Number"
                   value={values.number}
                   onChange={handleLiteChange}
+                  hasError={hasError("phone")}
+                  errorMessage={getError("phone")}
                 />
                 <LabelInput
                   id="guardian_name"
@@ -239,6 +256,8 @@ const RegisterForm = () => {
                   placeholder="Guardian Name"
                   value={values.guardian_name}
                   onChange={handleLiteChange}
+                  hasError={hasError("guardian_name")}
+                  errorMessage={getError("guardian_name")}
                 />
                 <LabelInput
                   id="guardian_number"
@@ -248,6 +267,8 @@ const RegisterForm = () => {
                   placeholder="Guardian Phone Number"
                   value={values.guardian_number}
                   onChange={handleLiteChange}
+                  hasError={hasError("guardian_number")}
+                  errorMessage={getError("guardian_number")}
                 />
                 <LabelSelect
                   id="company"
@@ -257,6 +278,8 @@ const RegisterForm = () => {
                   options={companyOptions}
                   selectedOption={selectedCompany}
                   onChange={handleCompanyChange}
+                  hasError={hasError("company")}
+                  errorMessage={getError("company")}
                 />
                 {showOtherInput && (
                   <LabelInput
@@ -268,6 +291,8 @@ const RegisterForm = () => {
                     required
                     value={values.companyOtherValue}
                     onChange={handleCompanyOtherValue}
+                    hasError={hasError("other_company")}
+                    errorMessage={getError("other_company")}
                   />
                 )}
                 <LabelSelect
@@ -278,6 +303,8 @@ const RegisterForm = () => {
                   options={sectionOptions}
                   selectedOption={selectedSection}
                   onChange={handleSectionChange}
+                  hasError={hasError("section")}
+                  errorMessage={getError("section")}
                 />
               </div>
               <div className="w-full relative">

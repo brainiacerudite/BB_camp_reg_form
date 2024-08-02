@@ -15,6 +15,10 @@ class RegisterController extends Controller
 
         // validate input data
         $errors = [];
+        if (empty($payload['image'])) {
+            $errors['image'] = 'Image field is required';
+        }
+
         if (empty($payload['surname'])) {
             $errors['surname'] = 'Surname field is required';
         }
@@ -36,10 +40,10 @@ class RegisterController extends Controller
         }
         
         // TODO: Check for duplicate surname and firstnsme
-        $checkDuplicateSql = "SELECT * WHERE surname = ? AND firstname = ? LIMIT 1";
+        $checkDuplicateSql = "SELECT * FROM users WHERE surname = ? AND firstname = ? LIMIT 1";
         $checkDuplicateResult = (new UserModel())->select($checkDuplicateSql, [
             $payload['surname'],
-            $payload['firstnsme'],
+            $payload['firstname'],
         ]);
         
         if(!empty($checkDuplicateResult)) {

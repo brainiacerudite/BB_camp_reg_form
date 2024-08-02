@@ -5,9 +5,16 @@ import images from "../../../constants/images";
 interface UploadImageProps {
   image: string | null;
   setImage: (image: string | null) => void;
+  hasError?: boolean;
+  errorMessage?: string | null;
 }
 
-const UploadImage = ({ image, setImage }: UploadImageProps) => {
+const UploadImage = ({
+  image,
+  setImage,
+  hasError,
+  errorMessage,
+}: UploadImageProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,7 +51,10 @@ const UploadImage = ({ image, setImage }: UploadImageProps) => {
   };
 
   return (
-    <div className="">
+    <div className="flex flex-col items-center">
+      <label htmlFor="imageInput" className="sr-only">
+        Image
+      </label>
       <input
         type="file"
         id="imageInput"
@@ -68,6 +78,11 @@ const UploadImage = ({ image, setImage }: UploadImageProps) => {
           <IoCloudUploadSharp />
         </span>
       </div>
+      {hasError && (
+        <span className="relative text-sm text-red-400 font-medium ml-2 pt-1">
+          {errorMessage}
+        </span>
+      )}
     </div>
   );
 };

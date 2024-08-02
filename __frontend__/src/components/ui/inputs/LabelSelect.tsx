@@ -15,6 +15,8 @@ interface LabelSelectProps {
   inputName?: string;
   otherValue?: string | number;
   inputChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  hasError?: boolean;
+  errorMessage?: string | null;
 }
 
 const LabelSelect = ({
@@ -25,6 +27,8 @@ const LabelSelect = ({
   options,
   selectedOption,
   onChange,
+  hasError,
+  errorMessage,
 }: LabelSelectProps) => {
   const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
     // const value = event.target.value;
@@ -53,6 +57,11 @@ const LabelSelect = ({
           </option>
         ))}
       </select>
+      {hasError && (
+        <span className="text-sm text-red-400 font-medium ml-2">
+          {errorMessage}
+        </span>
+      )}
     </div>
   );
 };
