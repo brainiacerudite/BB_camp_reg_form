@@ -7,6 +7,7 @@ import ScrollToTop from "./ScrollToTop";
 import Landing from "../pages/Landing";
 import Register from "../pages/Register";
 import Success from "../pages/Success";
+import RegStatus from "../pages/RegStatus";
 import PanelList from "../pages/PanelList";
 
 const RootRouter = () => {
@@ -15,7 +16,7 @@ const RootRouter = () => {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/register" element={<Register />} />
-        {/* <Route path="/reg-status" element={<RegStatus />} /> */}
+        <Route path="/reg-status" element={<RegStatus />} />
         <Route path="/success" element={<Success />} />
 
         {/* panel routes */}
