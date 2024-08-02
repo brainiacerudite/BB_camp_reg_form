@@ -11,7 +11,7 @@ const RegisterForm = () => {
   const [image, setImage] = useState<string | null>(null);
 
   const [errors, setErrors] = useState<string | null>("");
-  
+
   const [companyOtherValue, setCompanyOtherValue] = useState("");
   const [success, setSuccess] = useState<boolean>(false);
 
@@ -123,17 +123,17 @@ const RegisterForm = () => {
     setSelectedSection(value);
   };
 
-const hasError = (field) => {
-  if (errors) {
-    return Object.prototype.hasOwnProperty.call(errors, field)
-  }
-}
-const getError = (field) => {
-  if (errors && Object.prototype.hasOwnProperty.call(errors, field)) {
-    return errors[field]
-  }
-  return null
-}
+  const hasError = (field) => {
+    if (errors) {
+      return Object.prototype.hasOwnProperty.call(errors, field);
+    }
+  };
+  const getError = (field) => {
+    if (errors && Object.prototype.hasOwnProperty.call(errors, field)) {
+      return errors[field];
+    }
+    return null;
+  };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -154,9 +154,9 @@ const getError = (field) => {
       // return <SuccessMessage />;
     } catch (err) {
       if (err.response?.status === 422) {
-         setErrors(err.response.data.errors)
+        setErrors(err.response.data.errors);
       }
-      console.log(error);
+      console.log(err);
     } finally {
       setIsLoading(false);
     }
