@@ -9,6 +9,9 @@ import SuccessMessage from "../hi-fi/SuccessMessage";
 
 const RegisterForm = () => {
   const [image, setImage] = useState<string | null>(null);
+
+  const [error, setError] = useState<string | null>("");
+  
   const [companyOtherValue, setCompanyOtherValue] = useState("");
   const [success, setSuccess] = useState<boolean>(false);
 
@@ -137,7 +140,11 @@ const RegisterForm = () => {
       const res = await apiClient.post("/register", registrationData);
       if (res) setSuccess(true);
       // return <SuccessMessage />;
-    } catch (error) {
+    } catch (err) {
+      // if (err.response?.status === 422) {
+        
+      //   setError(err.response.data.errors)
+      // }
       console.log(error);
     } finally {
       setIsLoading(false);
