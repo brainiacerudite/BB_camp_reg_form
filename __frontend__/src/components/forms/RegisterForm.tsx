@@ -10,7 +10,7 @@ import SuccessMessage from "../hi-fi/SuccessMessage";
 const RegisterForm = () => {
   const [image, setImage] = useState<string | null>(null);
 
-  const [error, setError] = useState<string | null>("");
+  const [errors, setErrors] = useState<string | null>("");
   
   const [companyOtherValue, setCompanyOtherValue] = useState("");
   const [success, setSuccess] = useState<boolean>(false);
@@ -123,6 +123,18 @@ const RegisterForm = () => {
     setSelectedSection(value);
   };
 
+const hasError = (field) => {
+  if (errors) {
+    return Object.prototype.hasOwnProperty.call(errors, field)
+  }
+}
+const getError = (field) => {
+  if (errors && Object.prototype.hasOwnProperty.call(errors, field)) {
+    return errors[field]
+  }
+  return null
+}
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const registrationData = {
@@ -141,10 +153,9 @@ const RegisterForm = () => {
       if (res) setSuccess(true);
       // return <SuccessMessage />;
     } catch (err) {
-      // if (err.response?.status === 422) {
-        
-      //   setError(err.response.data.errors)
-      // }
+      if (err.response?.status === 422) {
+         setErrors(err.response.data.errors)
+      }
       console.log(error);
     } finally {
       setIsLoading(false);
