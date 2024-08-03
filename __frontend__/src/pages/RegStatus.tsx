@@ -93,29 +93,38 @@ const RegStatus = () => {
               </div>
             </form>
 
-<div className="mt-16"></div>
-            <hr />
-            {/* <div className="h-43">
-              <Spinner className="!h-12 !w-12" />
-              </div> */}
-              <div className="mt-16"></div>
-            <div className="flex flex-col gap-4 md:flex-row flex-wrap">
-              {lists.map(({ id, name, image }) => {
-                return (
-                  <div
-                    key={id}
-                    className="w-full flex gap-4 p-4 bg-white border shadow-md rounded-lg md:basis-[300px] md:flex-shrink-0"
-                  >
-                    <div>
-                      <img src={image} alt={name} className="w-20" />
-                    </div>
-                    <div>
-                      <h4>{name}</h4>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+            <div className="mt-10"></div>
+            {isLoading && (
+              <>
+                <hr />
+                <div className="mt-14 flex justify-center">
+                  <Spinner className="!h-12 !w-12" />
+                </div>
+              </>
+            )}
+            {!isLoading && lists.length > 0 && (
+              <>
+                <hr />
+                <div className="mt-8 grid grid-cols-1 gap-2 md:gap-4">
+                  {lists.map(({ id, name, image, village }) => {
+                    return (
+                      <div
+                        key={id}
+                        className="w-full flex items-center space-x-4 p-4 bg-yellow-100 border border-yellow-700 shadow-md rounded-lg"
+                      >
+                        <div className="bg-slate-400 rounded-md">
+                          <img src={image} alt={name} className="w-16" />
+                        </div>
+                        <div className="text-left">
+                          <div className="font-bold text-lg">{name}</div>
+                          <div className="font-normal text-base">{village} - Village</div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -129,6 +138,7 @@ interface DataType {
   id: number;
   name: string;
   image: string;
+  village: string;
 }
 
 const lists: DataType[] = [
@@ -136,10 +146,12 @@ const lists: DataType[] = [
     id: 1,
     name: "John Doe",
     image: images.avatar.src,
+    village: "Sure"
   },
   {
     id: 2,
     name: "John Doe",
     image: images.avatar.src,
+    village: "Steadfast"
   },
 ];
