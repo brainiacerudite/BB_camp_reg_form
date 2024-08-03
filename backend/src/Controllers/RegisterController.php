@@ -92,7 +92,7 @@ class RegisterController extends Controller
         ]);
         
         // TODO: generate tag
-        // $this->generateTag();
+        // $this->generateTag($userId);
 
         return ResponseHandler::json([
             'status' => 'success',
@@ -150,7 +150,28 @@ class RegisterController extends Controller
 
 			public function tag()
 			{
+			    $payload = $_GET;
+			    $payload = self::sanitizeInput($payload);
 			    
+			    // validate user id
+			    $errors = [];
+			    if(empty($payload['id'])) {
+			        return;
+			    }
+			    
+			    // TODO: consider generating user tag here!
+			    // $this->generateTag($payload['id']);
+			    
+			    
+			    // get tag from db
+			    $sql = "SELECT tag_image FROM tags WHERE user_id = ? LIMIT 1";
+			    $result = (new TagModel())->select([$payload['id']]);
+			    
+			    return ResponseHandler::json([
+            'status' => 'success',
+            'message' => 'Successful',
+            'data' => (object) $result,
+        ], 200);
 			}
 
 
@@ -180,4 +201,4 @@ class RegisterController extends Controller
             'data' => (object) $data,
         ], 200);
     }
-}
+}qw
