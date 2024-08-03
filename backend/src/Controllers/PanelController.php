@@ -45,12 +45,15 @@ class PanelController extends Controller
         }
 
         // sql query to search for data with name or like
-        // $sql = "SELECT * FROM users WHERE surname LIKE ? OR firstname LIKE ? OR middlename LIKE ? OR village LIKE ? OR guardian_name LIKE ? OR company LIKE ? OR section LIKE ? ORDER BY id DESC";
-        $sql = "SELECT * FROM users WHERE surname LIKE ? OR firstname LIKE ? OR middlename LIKE ? ORDER BY id DESC";
+        $sql = "SELECT * FROM users WHERE surname LIKE ? OR firstname LIKE ? OR middlename LIKE ? OR village LIKE ? OR guardian_name LIKE ? OR company LIKE ? OR section LIKE ? ORDER BY id DESC";
         $data = (new UserModel())->select($sql, [
-            $payload['search'],
-            $payload['search'],
-            $payload['search'],
+            '%' . $payload['search'] . '%',
+            '%' . $payload['search'] . '%',
+            '%' . $payload['search'] . '%',
+            '%' . $payload['search'] . '%',
+            '%' . $payload['search'] . '%',
+            '%' . $payload['search'] . '%',
+            '%' . $payload['search'] . '%',
         ]);
 
         return ResponseHandler::json([

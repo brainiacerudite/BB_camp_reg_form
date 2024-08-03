@@ -39,9 +39,10 @@ const PanelList = () => {
   const fetchLists = async (searchText = null) => {
     setIsLoading(true);
     try {
-      const data = searchText ? { search: searchText } : null;
-      const url = searchText ? "/panel/search" : "/panel/list";
-      const res = await apiClient.get(url, data);
+      const url = searchText
+        ? `/panel/search?search=${searchText}`
+        : "/panel/list";
+      const res = await apiClient.get(url);
       setListCount(res.data.count);
       setLists(res.data.data);
     } catch (err) {
