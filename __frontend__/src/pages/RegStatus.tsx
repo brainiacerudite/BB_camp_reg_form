@@ -12,6 +12,7 @@ const RegStatus = () => {
     name: string;
     image: string;
     village: string;
+    culture: string;
   }
   const [lists, setLists] = useState<DataType[] | null>([]);
 
@@ -43,7 +44,6 @@ const RegStatus = () => {
     try {
       setIsLoading(true);
       const res = await apiClient.post("/check", payloadData);
-      console.log(res);
       // return <SuccessMessage />;
       setLists(res.data.data);
     } catch (err) {
@@ -107,7 +107,7 @@ const RegStatus = () => {
               <>
                 <hr className="mt-10" />
                 <div className="relative mt-8 grid grid-cols-1 gap-2 md:gap-4">
-                  {lists.map(({ id, name, image, village }) => {
+                  {lists.map(({ id, name, image, village, culture }) => {
                     return (
                       <div
                         key={id}
@@ -123,6 +123,7 @@ const RegStatus = () => {
                         <div className="text-left">
                           <div className="font-bold text-lg">{name}</div>
                           <div className="font-medium text-base">{village}</div>
+                          <div className="font-medium text-base">{culture}</div>
                         </div>
                       </div>
                     );

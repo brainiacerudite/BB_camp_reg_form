@@ -27,9 +27,10 @@ const PanelList = () => {
     name: string;
     image: string;
     village: string;
+    culture: string;
   }
 
-  const [errors, setErrors] = useState<string | null>("");
+  // const [errors, setErrors] = useState<string | null>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [listCount, setListCount] = useState<number>(0);
   const [lists, setLists] = useState<DataType[] | null>([]);
@@ -103,7 +104,7 @@ const PanelList = () => {
             <span className="text-gray-400">Count:</span> {listCount}
           </div>
           <div className="relative mt-8 grid grid-cols-1 gap-2 sm:grid-cols-2 md:gap-4 xl:grid-cols-3">
-            {lists.map(({ id, name, image, village }) => {
+            {lists.map(({ id, name, image, village, culture }) => {
               return (
                 <div
                   key={id}
@@ -119,6 +120,7 @@ const PanelList = () => {
                   <div className="text-left">
                     <div className="font-bold text-lg">{name}</div>
                     <div className="font-medium text-base">{village}</div>
+                    <div className="font-medium text-base">{culture}</div>
                   </div>
                 </div>
               );
