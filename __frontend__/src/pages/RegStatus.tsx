@@ -3,17 +3,17 @@ import LabelInput from "../components/ui/inputs/LabelInput";
 import SolidButton from "../components/ui/buttons/SolidButton";
 import useInput from "react-lite-input";
 import apiClient from "../libs/apiClient";
-import images from "../constants/images";
 import Spinner from "../components/Spinner";
 
 const RegStatus = () => {
   const [errors, setErrors] = useState<string | null>("");
-  // interface DataType {
-  //   id: number;
-  //   name: string;
-  //   image: string;
-  // }
-  // const [lists, setLists] = useState<DataType[] | null>([]);
+  interface DataType {
+    id: number;
+    name: string;
+    image: string;
+    village: string;
+  }
+  const [lists, setLists] = useState<DataType[] | null>([]);
 
   const initialValues = {
     surname: "",
@@ -42,8 +42,10 @@ const RegStatus = () => {
     };
     try {
       setIsLoading(true);
-      const res = await apiClient.post("/check", payloadData);
+      const res = await apiClient.get("/check", payloadData);
+      console.log(res);
       // return <SuccessMessage />;
+      setLists(res.data.data);
     } catch (err) {
       if (err.response?.status === 422) {
         setErrors(err.response.data.errors);
@@ -93,10 +95,9 @@ const RegStatus = () => {
               </div>
             </form>
 
-            <div className="mt-10"></div>
             {isLoading && (
               <>
-                <hr />
+                <hr className="mt-10" />
                 <div className="mt-14 flex justify-center">
                   <Spinner className="!h-12 !w-12" />
                 </div>
@@ -104,7 +105,7 @@ const RegStatus = () => {
             )}
             {!isLoading && lists.length > 0 && (
               <>
-                <hr />
+                <hr className="mt-10" />
                 <div className="relative mt-8 grid grid-cols-1 gap-2 md:gap-4">
                   {lists.map(({ id, name, image, village }) => {
                     return (
@@ -112,12 +113,14 @@ const RegStatus = () => {
                         key={id}
                         className="w-full flex items-center space-x-4 p-4 bg-yellow-100 border border-yellow-700 shadow-md rounded-lg hover:bg-yellow-600"
                       >
-                        <div className="bg-slate-400 rounded-md">
-                          <img src={image} alt={name} className="w-16" />
+                        <div className="bg-slate-400 rounded-md w-16 h-16 overflow-hidden">
+                          <img src={image} alt={name} className="w-full h-full object-cover" />
                         </div>
                         <div className="text-left">
                           <div className="font-bold text-lg">{name}</div>
-                          <div className="font-medium text-base">{village} - Village</div>
+                          <div className="font-medium text-base">
+                            Village: {village}
+                          </div>
                         </div>
                       </div>
                     );
@@ -133,25 +136,3 @@ const RegStatus = () => {
 };
 
 export default RegStatus;
-
-interface DataType {
-  id: number;
-  name: string;
-  image: string;
-  village: string;
-}
-
-const lists: DataType[] = [
-  {
-    id: 1,
-    name: "John Doe",
-    image: images.avatar.src,
-    village: "Sure"
-  },
-  {
-    id: 2,
-    name: "John Doe",
-    image: images.avatar.src,
-    village: "Steadfast"
-  },
-];

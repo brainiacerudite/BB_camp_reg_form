@@ -100,10 +100,11 @@ const RegisterForm = () => {
 
   const sectionOptions = [
     { value: "", label: "Select Your Section" },
-    { value: "anchor", label: "Anchor Section" },
-    { value: "junior", label: "Junior Section" },
+    { value: "anchor", label: "Anchor Boys" },
+    { value: "junior", label: "Junior Boys" },
     { value: "company", label: "Company Section" },
-    { value: "senior", label: "Senior Section" },
+    { value: "senior", label: "Senior Boys" },
+    { value: "officer", label: "Officers" },
     { value: "newmember", label: "New Member" },
   ];
 

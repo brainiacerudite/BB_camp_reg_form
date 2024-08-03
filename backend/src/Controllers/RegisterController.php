@@ -46,7 +46,7 @@ class RegisterController extends Controller
             $payload['firstname'],
         ]);
 
-        if(!empty($checkDuplicateResult)) {
+        if (!empty($checkDuplicateResult)) {
             $errors['surname'] = 'Name already exist';
         }
 
@@ -78,9 +78,11 @@ class RegisterController extends Controller
         }
 
         // save to db
-        $sql = "INSERT INTO users (name, gender, email, phone, guardian_name, guardian_phone, company, section, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO users (surname, firstname, middlename, gender, email, phone, guardian_name, guardian_phone, company, section, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $userId = (new UserModel())->insert($sql, [
-            $payload['name'],
+            $payload['surname'],
+            $payload['firstname'],
+            $payload['middlename'],
             $payload['gender'],
             $payload['email'] ?? null,
             $payload['phone'] ?? null,
@@ -90,7 +92,7 @@ class RegisterController extends Controller
             $payload['section'],
             $payload['image'] ?? null
         ]);
-        
+
         // TODO: generate tag
         // $this->generateTag($userId);
 
@@ -99,38 +101,38 @@ class RegisterController extends Controller
             'message' => 'Registered Successfully',
         ], 201);
     }
-    
+
     private function generateTag($userId)
     {
         // TODO: Adjust where necessary
         // Fetch user data
         $sql = "SELECT surname, firstname, middlename, image, village FROM users WHERE id = ?";
         $user = (new UserModel())->select($sql, [$userId]);
-        
+
         if (count($user) <= 0) {
             return false;
         }
-        
+
         // Path to the background image
         $background_image_path = 'path/to/your/background_image.jpg';
-        
+
         // Create the image from the background
         $image = imagecreatefromjpeg($background_image_path);
-        
+
         // Allocate colors
         $black = imagecolorallocate($image, 0, 0, 0);
         $white = imagecolorallocate($image, 255, 255, 255);
-        
+
         // Set the font file path (use a TTF font file)
         $font_path = 'path/to/your/font.ttf';
-        
+
         // User data to be added to the image
-        $name = $user['surname']." ".$user['firstname']." ".$user['middlename'];
+        $name = $user['surname'] . " " . $user['firstname'] . " " . $user['middlename'];
         $photo_path = 'uploads/' . $user['image'];
-        
+
         // Add user name to the image
         imagettftext($image, 20, 0, 100, 100, $black, $font_path, $name);
-        
+
         // Add user photo to the image
         $user_photo = imagecreatefromjpeg($photo_path);
         $photo_x = 50; // x-coordinate for the photo
@@ -138,42 +140,41 @@ class RegisterController extends Controller
         $photo_width = 100; // width of the photo
         $photo_height = 100; // height of the photo
         imagecopyresized($image, $user_photo, $photo_x, $photo_y, 0, 0, $photo_width, $photo_height, imagesx($user_photo), imagesy($user_photo));
-        
+
         // Save the image
         $image_path = 'generated_id_cards/user_' . $user_id . '.jpg';
         imagejpeg($image, $image_path);
-        
+
         // Free memory
         imagedestroy($image);
         imagedestroy($user_photo);
     }
 
-			public function tag()
-			{
-			    $payload = $_GET;
-			    $payload = self::sanitizeInput($payload);
-			    
-			    // validate user id
-			    $errors = [];
-			    if(empty($payload['id'])) {
-			        return;
-			    }
-			    
-			    // TODO: consider generating user tag here!
-			    // $this->generateTag($payload['id']);
-			    
-			    
-			    // get tag from db
-			    $sql = "SELECT tag_image FROM tags WHERE user_id = ? LIMIT 1";
-			    $result = (new TagModel())->select([$payload['id']]);
-			    
-			    return ResponseHandler::json([
+    public function tag()
+    {
+        $payload = $_GET;
+        $payload = self::sanitizeInput($payload);
+
+        // validate user id
+        $errors = [];
+        if (empty($payload['id'])) {
+            return;
+        }
+
+        // TODO: consider generating user tag here!
+        // $this->generateTag($payload['id']);
+
+
+        // get tag from db
+        $sql = "SELECT tag_image FROM tags WHERE user_id = ? LIMIT 1";
+        $result = (new TagModel())->select([$payload['id']]);
+
+        return ResponseHandler::json([
             'status' => 'success',
             'message' => 'Successful',
             'data' => (object) $result,
         ], 200);
-			}
-
+    }
 
     public function check()
     {
@@ -198,7 +199,15 @@ class RegisterController extends Controller
         return ResponseHandler::json([
             'status' => 'success',
             'message' => 'Successful',
-            'data' => (object) $data,
+            // map data into data and return just surname and firstname
+            'data' => array_map(function ($item) {
+                return [
+                    'id' => $item['id'],
+                    'name' => "{$item['surname']} {$item['firstname']} {$item['middlename']}",
+                    'image' => "{$_ENV['APP_URL']}{$item['image']}",
+                    'village' => $item['village'] ?: 'None',
+                ];
+            }, $data),
         ], 200);
     }
-}qw
+}
