@@ -42,7 +42,7 @@ const RegStatus = () => {
     };
     try {
       setIsLoading(true);
-      const res = await apiClient.get("/check", payloadData);
+      const res = await apiClient.post("/check", payloadData);
       console.log(res);
       // return <SuccessMessage />;
       setLists(res.data.data);

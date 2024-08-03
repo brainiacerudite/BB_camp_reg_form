@@ -22,7 +22,7 @@ $router = new Router();
 
 // Define routes
 $router->post('/register', ['App\Controllers\RegisterController', 'register']);
-$router->get('/check', ['App\Controllers\RegisterController', 'check']);
+$router->post('/check', ['App\Controllers\RegisterController', 'check']);
 $router->get('/tag', ['App\Controllers\RegisterController', 'tag']);
 // Define panel routes
 $router->get('/panel/list', ['App\Controllers\PanelController', 'list']);

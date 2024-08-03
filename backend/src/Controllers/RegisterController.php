@@ -178,7 +178,7 @@ class RegisterController extends Controller
 
     public function check()
     {
-        $payload = $_GET;
+        $payload = self::getPayload();
         $payload = self::sanitizeInput($payload);
 
         // Check if query fields are set
