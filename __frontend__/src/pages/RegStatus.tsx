@@ -105,19 +105,19 @@ const RegStatus = () => {
             {!isLoading && lists.length > 0 && (
               <>
                 <hr />
-                <div className="mt-8 grid grid-cols-1 gap-2 md:gap-4">
+                <div className="relative mt-8 grid grid-cols-1 gap-2 md:gap-4">
                   {lists.map(({ id, name, image, village }) => {
                     return (
                       <div
                         key={id}
-                        className="w-full flex items-center space-x-4 p-4 bg-yellow-100 border border-yellow-700 shadow-md rounded-lg"
+                        className="w-full flex items-center space-x-4 p-4 bg-yellow-100 border border-yellow-700 shadow-md rounded-lg hover:bg-yellow-600"
                       >
                         <div className="bg-slate-400 rounded-md">
                           <img src={image} alt={name} className="w-16" />
                         </div>
                         <div className="text-left">
                           <div className="font-bold text-lg">{name}</div>
-                          <div className="font-normal text-base">{village} - Village</div>
+                          <div className="font-medium text-base">{village} - Village</div>
                         </div>
                       </div>
                     );
