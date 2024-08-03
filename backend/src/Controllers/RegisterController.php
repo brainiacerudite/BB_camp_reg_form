@@ -102,6 +102,67 @@ class RegisterController extends Controller
         ], 201);
     }
 
+    public function check()
+    {
+        $payload = self::getPayload();
+        $payload = self::sanitizeInput($payload);
+
+        // Check if query fields are set
+        $queryFields = ['surname', 'firstname'];
+        foreach ($queryFields as $field) {
+            if (!isset($payload[$field])) {
+                $payload[$field] = null;
+            }
+        }
+
+        // sql query to search for data with name or like
+        $sql = "SELECT * FROM users WHERE surname LIKE ? AND firstname LIKE ?";
+        $data = (new UserModel())->select($sql, [
+            '%' . $payload['surname'] . '%',
+            '%' . $payload['firstname'] . '%',
+        ]);
+
+        return ResponseHandler::json([
+            'status' => 'success',
+            'message' => 'Successful',
+            // map data into data and return just surname and firstname
+            'data' => array_map(function ($item) {
+                return [
+                    'id' => $item['id'],
+                    'name' => "{$item['surname']} {$item['firstname']} {$item['middlename']}",
+                    'image' => "{$_ENV['APP_URL']}{$item['image']}",
+                    'village' => "Village: ".($item['village'] ?: 'None'),
+                ];
+            }, $data),
+        ], 200);
+    }
+    
+    public function tag()
+    {
+        $payload = $_GET;
+        $payload = self::sanitizeInput($payload);
+
+        // validate user id
+        $errors = [];
+        if (empty($payload['id'])) {
+            return;
+        }
+
+        // TODO: consider generating user tag here!
+        // $this->generateTag($payload['id']);
+
+
+        // get tag from db
+        $sql = "SELECT tag_image FROM tags WHERE user_id = ? LIMIT 1";
+        $result = (new TagModel())->select([$payload['id']]);
+
+        return ResponseHandler::json([
+            'status' => 'success',
+            'message' => 'Successful',
+            'data' => (object) $result,
+        ], 200);
+    }
+    
     private function generateTag($userId)
     {
         // TODO: Adjust where necessary
@@ -150,64 +211,8 @@ class RegisterController extends Controller
         imagedestroy($user_photo);
     }
 
-    public function tag()
+    private function assignVillage()
     {
-        $payload = $_GET;
-        $payload = self::sanitizeInput($payload);
-
-        // validate user id
-        $errors = [];
-        if (empty($payload['id'])) {
-            return;
-        }
-
-        // TODO: consider generating user tag here!
-        // $this->generateTag($payload['id']);
-
-
-        // get tag from db
-        $sql = "SELECT tag_image FROM tags WHERE user_id = ? LIMIT 1";
-        $result = (new TagModel())->select([$payload['id']]);
-
-        return ResponseHandler::json([
-            'status' => 'success',
-            'message' => 'Successful',
-            'data' => (object) $result,
-        ], 200);
-    }
-
-    public function check()
-    {
-        $payload = self::getPayload();
-        $payload = self::sanitizeInput($payload);
-
-        // Check if query fields are set
-        $queryFields = ['surname', 'firstname'];
-        foreach ($queryFields as $field) {
-            if (!isset($payload[$field])) {
-                $payload[$field] = null;
-            }
-        }
-
-        // sql query to search for data with name or like
-        $sql = "SELECT * FROM users WHERE surname LIKE ? AND firstname LIKE ?";
-        $data = (new UserModel())->select($sql, [
-            '%' . $payload['surname'] . '%',
-            '%' . $payload['firstname'] . '%',
-        ]);
-
-        return ResponseHandler::json([
-            'status' => 'success',
-            'message' => 'Successful',
-            // map data into data and return just surname and firstname
-            'data' => array_map(function ($item) {
-                return [
-                    'id' => $item['id'],
-                    'name' => "{$item['surname']} {$item['firstname']} {$item['middlename']}",
-                    'image' => "{$_ENV['APP_URL']}{$item['image']}",
-                    'village' => "Village: ".($item['village'] ?: 'None'),
-                ];
-            }, $data),
-        ], 200);
+        // TODO: do this
     }
 }

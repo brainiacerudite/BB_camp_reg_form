@@ -1,7 +1,6 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import FilterList from "../assets/icons/filter_list.svg";
 import AddBtn from "../assets/icons/add-frame.svg";
-import images from "../constants/images";
 import { useNavigate } from "react-router-dom";
 import Spinner from "../components/Spinner";
 import apiClient from "../libs/apiClient";
