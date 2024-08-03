@@ -92,6 +92,7 @@ class RegisterController extends Controller
         ]);
         
         // TODO: generate tag
+        // $this->generateTag();
 
         return ResponseHandler::json([
             'status' => 'success',
@@ -99,10 +100,59 @@ class RegisterController extends Controller
         ], 201);
     }
     
-    private function generateTag()
+    private function generateTag($userId)
     {
+        // TODO: Adjust where necessary
+        // Fetch user data
+        $sql = "SELECT surname, firstname, middlename, image, village FROM users WHERE id = ?";
+        $user = (new UserModel())->select($sql, [$userId]);
         
+        if (count($user) <= 0) {
+            return false;
+        }
+        
+        // Path to the background image
+        $background_image_path = 'path/to/your/background_image.jpg';
+        
+        // Create the image from the background
+        $image = imagecreatefromjpeg($background_image_path);
+        
+        // Allocate colors
+        $black = imagecolorallocate($image, 0, 0, 0);
+        $white = imagecolorallocate($image, 255, 255, 255);
+        
+        // Set the font file path (use a TTF font file)
+        $font_path = 'path/to/your/font.ttf';
+        
+        // User data to be added to the image
+        $name = $user['surname']." ".$user['firstname']." ".$user['middlename'];
+        $photo_path = 'uploads/' . $user['image'];
+        
+        // Add user name to the image
+        imagettftext($image, 20, 0, 100, 100, $black, $font_path, $name);
+        
+        // Add user photo to the image
+        $user_photo = imagecreatefromjpeg($photo_path);
+        $photo_x = 50; // x-coordinate for the photo
+        $photo_y = 150; // y-coordinate for the photo
+        $photo_width = 100; // width of the photo
+        $photo_height = 100; // height of the photo
+        imagecopyresized($image, $user_photo, $photo_x, $photo_y, 0, 0, $photo_width, $photo_height, imagesx($user_photo), imagesy($user_photo));
+        
+        // Save the image
+        $image_path = 'generated_id_cards/user_' . $user_id . '.jpg';
+        imagejpeg($image, $image_path);
+        
+        // Free memory
+        imagedestroy($image);
+        imagedestroy($user_photo);
     }
+
+			public function tag()
+			{
+			    
+			}
+
 
     public function check()
     {
@@ -130,6 +180,4 @@ class RegisterController extends Controller
             'data' => (object) $data,
         ], 200);
     }
-
-    
 }
