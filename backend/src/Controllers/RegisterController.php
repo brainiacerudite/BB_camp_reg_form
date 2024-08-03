@@ -205,7 +205,7 @@ class RegisterController extends Controller
                     'id' => $item['id'],
                     'name' => "{$item['surname']} {$item['firstname']} {$item['middlename']}",
                     'image' => "{$_ENV['APP_URL']}{$item['image']}",
-                    'village' => $item['village'] ?: 'None',
+                    'village' => "Village: ".($item['village'] ?: 'None'),
                 ];
             }, $data),
         ], 200);

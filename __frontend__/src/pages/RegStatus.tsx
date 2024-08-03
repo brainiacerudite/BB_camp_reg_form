@@ -114,13 +114,15 @@ const RegStatus = () => {
                         className="w-full flex items-center space-x-4 p-4 bg-yellow-100 border border-yellow-700 shadow-md rounded-lg hover:bg-yellow-600"
                       >
                         <div className="bg-slate-400 rounded-md w-16 h-16 overflow-hidden">
-                          <img src={image} alt={name} className="w-full h-full object-cover" />
+                          <img
+                            src={image}
+                            alt={name}
+                            className="w-full h-full object-cover"
+                          />
                         </div>
                         <div className="text-left">
                           <div className="font-bold text-lg">{name}</div>
-                          <div className="font-medium text-base">
-                            Village: {village}
-                          </div>
+                          <div className="font-medium text-base">{village}</div>
                         </div>
                       </div>
                     );
