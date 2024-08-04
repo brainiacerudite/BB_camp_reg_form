@@ -111,7 +111,8 @@ const PanelList = () => {
             {lists.map(({ id, name, image, village, culture }) => {
               return (
                 <div
-                  onClick={handleGoToTag(id)}
+                  onClick={()=> handleGoToTag(id)}
+                  // onClick={handleGoToTag(id)}
                   key={id}
                   className="w-full flex items-center space-x-4 p-4 bg-yellow-100 border border-yellow-700 shadow-md rounded-lg hover:bg-yellow-600"
                 >
