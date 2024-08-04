@@ -20,6 +20,23 @@ class TagController extends Controller
         }
         $userId = $payload['id'];
 
+        // check if user exist
+        $userCheckSql = "SELECT * FROM users WHERE id = ? LIMIT 1";
+        $userCheck = (new UserModel)->select($userCheckSql, [$userId]);
+        if (!$userCheck) {
+            $errors['user'] = 'User Not Found';
+        }
+
+        // check if there is errors and return 422
+        if (!empty($errors)) {
+            return ResponseHandler::json([
+                'status' => 'error',
+                'message' => 'Something went wrong',
+                'errors' => (object) $errors
+            ], 400);
+        }
+
+
         // check if tag exist
         $tag = $this->tagExist($userId);
 
