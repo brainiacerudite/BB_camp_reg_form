@@ -43,7 +43,7 @@ class TagController extends Controller
     {
         $sql = "SELECT tag FROM tags WHERE user_id = ? LIMIT 1";
         $tag = (new TagModel())->select($sql, [$userId]);
-        return $tag[0];
+        return $tag ? $tag[0] : null;
     }
 
     private function tagCreate($userId, $tagImageUrl)
