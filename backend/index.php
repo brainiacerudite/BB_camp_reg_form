@@ -23,10 +23,11 @@ $router = new Router();
 // Define routes
 $router->post('/register', ['App\Controllers\RegisterController', 'register']);
 $router->post('/check', ['App\Controllers\RegisterController', 'check']);
-$router->get('/tag', ['App\Controllers\RegisterController', 'tag']);
 // Define panel routes
 $router->get('/panel/list', ['App\Controllers\PanelController', 'list']);
 $router->get('/panel/search', ['App\Controllers\PanelController', 'search']);
+// General routes
+$router->get('/tag', ['App\Controllers\TagController', 'tag']);
 
 // error_log("Actual Request URI: " . $_SERVER['REQUEST_URI']);
 // exclude query params from $_SERVER['REQUEST_URI']

@@ -39,7 +39,7 @@ class RegisterController extends Controller
             $errors['section'] = 'Section field is required';
         }
 
-        // TODO: Check for duplicate surname and firstnsme
+        // Check for duplicate surname and firstnsme
         $checkDuplicateSql = "SELECT * FROM users WHERE surname = ? AND firstname = ? LIMIT 1";
         $checkDuplicateResult = (new UserModel())->select($checkDuplicateSql, [
             $payload['surname'],
@@ -77,8 +77,11 @@ class RegisterController extends Controller
             ], 422);
         }
 
+        // assign village and culture
+        $villageCulture = $this->assignVillage();
+
         // save to db
-        $sql = "INSERT INTO users (surname, firstname, middlename, gender, email, phone, guardian_name, guardian_phone, company, section, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO users (surname, firstname, middlename, gender, email, phone, guardian_name, guardian_phone, company, section, image, village, culture) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $userId = (new UserModel())->insert($sql, [
             $payload['surname'],
             $payload['firstname'],
@@ -90,11 +93,10 @@ class RegisterController extends Controller
             $payload['guardian_phone'] ?? null,
             $payload['company'],
             $payload['section'],
-            $payload['image'] ?? null
+            $payload['image'] ?? null,
+            $villageCulture['village'],
+            $villageCulture['culture']
         ]);
-
-        // TODO: generate tag
-        // $this->generateTag($userId);
 
         return ResponseHandler::json([
             'status' => 'success',
@@ -131,89 +133,30 @@ class RegisterController extends Controller
                     'id' => $item['id'],
                     'name' => "{$item['surname']} {$item['firstname']} {$item['middlename']}",
                     'image' => "{$_ENV['APP_URL']}{$item['image']}",
-                    'village' => "Village: ".($item['village'] ?: 'None'),
-                    'culture' => "Culture: ".($item['village'] ?: 'None'),
+                    'village' => "Village: " . ($item['village'] ?: 'None'),
+                    'culture' => "Culture: " . ($item['village'] ?: 'None'),
                 ];
             }, $data),
         ], 200);
     }
-    
-    public function tag()
-    {
-        $payload = $_GET;
-        $payload = self::sanitizeInput($payload);
-
-        // validate user id
-        $errors = [];
-        if (empty($payload['id'])) {
-            return;
-        }
-
-        // TODO: consider generating user tag here!
-        // $this->generateTag($payload['id']);
-
-
-        // get tag from db
-        $sql = "SELECT tag_image FROM tags WHERE user_id = ? LIMIT 1";
-        $result = (new TagModel())->select([$payload['id']]);
-
-        return ResponseHandler::json([
-            'status' => 'success',
-            'message' => 'Successful',
-            'data' => (object) $result,
-        ], 200);
-    }
-    
-    private function generateTag($userId)
-    {
-        // TODO: Adjust where necessary
-        // Fetch user data
-        $sql = "SELECT surname, firstname, middlename, image, village FROM users WHERE id = ?";
-        $user = (new UserModel())->select($sql, [$userId]);
-
-        if (count($user) <= 0) {
-            return false;
-        }
-
-        // Path to the background image
-        $background_image_path = 'path/to/your/background_image.jpg';
-
-        // Create the image from the background
-        $image = imagecreatefromjpeg($background_image_path);
-
-        // Allocate colors
-        $black = imagecolorallocate($image, 0, 0, 0);
-        $white = imagecolorallocate($image, 255, 255, 255);
-
-        // Set the font file path (use a TTF font file)
-        $font_path = 'path/to/your/font.ttf';
-
-        // User data to be added to the image
-        $name = $user['surname'] . " " . $user['firstname'] . " " . $user['middlename'];
-        $photo_path = 'uploads/' . $user['image'];
-
-        // Add user name to the image
-        imagettftext($image, 20, 0, 100, 100, $black, $font_path, $name);
-
-        // Add user photo to the image
-        $user_photo = imagecreatefromjpeg($photo_path);
-        $photo_x = 50; // x-coordinate for the photo
-        $photo_y = 150; // y-coordinate for the photo
-        $photo_width = 100; // width of the photo
-        $photo_height = 100; // height of the photo
-        imagecopyresized($image, $user_photo, $photo_x, $photo_y, 0, 0, $photo_width, $photo_height, imagesx($user_photo), imagesy($user_photo));
-
-        // Save the image
-        $image_path = 'generated_id_cards/user_' . $user_id . '.jpg';
-        imagejpeg($image, $image_path);
-
-        // Free memory
-        imagedestroy($image);
-        imagedestroy($user_photo);
-    }
 
     private function assignVillage()
     {
-        // TODO: do this
+        $sql = "SELECT * FROM users";
+        $users = (new UserModel())->select($sql);
+        $userCount = count($users);
+
+        // Array of villages
+        $villages = ["Village 1", "Village 2", "Village 3", "Village 4"];
+        // Array of culture
+        $culture = ['Yoruba', 'Igbo', 'Hausa', 'Western'];
+
+        // Calculate the index of the village using modulo operation
+        $villageIndex = $userCount % count($villages);
+
+        return [
+            'village' => $villages[$villageIndex],
+            'culture' => $culture[$villageIndex],
+        ];
     }
 }
