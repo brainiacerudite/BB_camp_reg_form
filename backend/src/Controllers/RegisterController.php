@@ -134,7 +134,7 @@ class RegisterController extends Controller
                     'name' => "{$item['surname']} {$item['firstname']} {$item['middlename']}",
                     'image' => "{$_ENV['APP_URL']}{$item['image']}",
                     'village' => "Village: " . ($item['village'] ?: 'None'),
-                    'culture' => "Culture: " . ($item['village'] ?: 'None'),
+                    'culture' => "Culture: " . ($item['culture'] ?: 'None'),
                 ];
             }, $data),
         ], 200);
@@ -147,7 +147,7 @@ class RegisterController extends Controller
         $userCount = count($users);
 
         // Array of villages
-        $villages = ["Village 1", "Village 2", "Village 3", "Village 4"];
+        $villages = ["Sure", "Steadfast", "Religion", "Discipline"];
         // Array of culture
         $culture = ['Yoruba', 'Igbo', 'Hausa', 'Western'];
 

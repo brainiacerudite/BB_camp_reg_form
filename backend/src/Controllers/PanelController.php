@@ -23,7 +23,7 @@ class PanelController extends Controller
                     'name' => "{$item['surname']} {$item['firstname']} {$item['middlename']}",
                     'image' => "{$_ENV['APP_URL']}{$item['image']}",
                     'village' => "Village: " . ($item['village'] ?: 'None'),
-                    'culture' => "Culture: ".($item['village'] ?: 'None'),
+                    'culture' => "Culture: ".($item['culture'] ?: 'None'),
                 ];
             }, $data),
         ], 200);
@@ -67,7 +67,7 @@ class PanelController extends Controller
                     'name' => "{$item['surname']} {$item['firstname']} {$item['middlename']}",
                     'image' => "{$_ENV['APP_URL']}{$item['image']}",
                     'village' => "Village: " . ($item['village'] ?: 'None'),
-                    'culture' => "Culture: ".($item['village'] ?: 'None'),
+                    'culture' => "Culture: ".($item['culture'] ?: 'None'),
                 ];
             }, $data),
         ], 200);
