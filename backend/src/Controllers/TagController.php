@@ -52,7 +52,7 @@ class TagController extends Controller
             'status' => 'success',
             'message' => 'Successful',
             // 'data' => (object) $result,
-            'data' => $imageUrl
+            'data' => $_ENV['APP_URL'] . $imageUrl
         ], 200);
     }
 
@@ -170,7 +170,8 @@ class TagController extends Controller
         imagecopy($image, $final_photo, $photo_x, $photo_y, 0, 0, $photo_width, $photo_height);
 
         // Save the image
-        $image_path = $_SERVER['DOCUMENT_ROOT'] . '/assets/tags/' . $userId . '.jpg';
+        $imageFileName = '/assets/tags/' . $userId . '.jpg';
+        $image_path = $_SERVER['DOCUMENT_ROOT'] . $imageFileName;
         imagejpeg($image, $image_path);
 
         // Free memory
@@ -180,6 +181,6 @@ class TagController extends Controller
         imagedestroy($final_photo);
         imagedestroy($resized_photo);
 
-        return $image_path;
+        return $imageFileName;
     }
 }
