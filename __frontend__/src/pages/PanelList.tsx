@@ -72,6 +72,10 @@ const PanelList = () => {
     navigate("/register");
   };
 
+  const handleGoToTag = (id: any) => {
+    navigate(`/tag?id=${id}`);
+  };
+
   return (
     <div className="relative h-screen space-y-5 py-4 px-4 xl:px-40 bg-defaultBgImage bg-bgGlassMorphism backdrop-blur-sm">
       <div className="mt-4 flex items-center">
@@ -107,6 +111,7 @@ const PanelList = () => {
             {lists.map(({ id, name, image, village, culture }) => {
               return (
                 <div
+                  onClick={handleGoToTag(id)}
                   key={id}
                   className="w-full flex items-center space-x-4 p-4 bg-yellow-100 border border-yellow-700 shadow-md rounded-lg hover:bg-yellow-600"
                 >

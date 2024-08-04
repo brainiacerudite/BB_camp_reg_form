@@ -8,6 +8,7 @@ import Landing from "../pages/Landing";
 import Register from "../pages/Register";
 import Success from "../pages/Success";
 import RegStatus from "../pages/RegStatus";
+import Tag from "../pages/Tag";
 import PanelList from "../pages/PanelList";
 
 const RootRouter = () => {
@@ -18,6 +19,7 @@ const RootRouter = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/reg-status" element={<RegStatus />} />
         <Route path="/success" element={<Success />} />
+        <Route path="/tag" element={<Tag />} />
 
         {/* panel routes */}
         <Route path="/panel/list" element={<PanelList />} />
