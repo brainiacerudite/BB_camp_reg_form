@@ -108,11 +108,31 @@ class TagController extends Controller
         imagettftext($image, 16, 0, 200, 800, $black, $font_path, ucwords($user['village'] ?? 'none'));
 
         // Load user photo to the image
-        // check $photo_path format if png or jpg
-        if (pathinfo($photo_path, PATHINFO_EXTENSION) == 'png') {
+        // check $photo_path format
+        $mime = getimagesize($photo_path);
+        if ($mime['mime'] == 'image/png') {
             $user_photo = imagecreatefrompng($photo_path);
-        } else {
+        }
+        if ($mime['mime'] == 'image/jpg' || $mime['mime'] == 'image/jpeg' || $mime['mime'] == 'image/pjpeg') {
             $user_photo = imagecreatefromjpeg($photo_path);
+        }
+
+        // Get exif information
+        $exif = exif_read_data($photo_path);
+
+        // Manipulate image
+        if ($exif && isset($exif['Orientation'])) {
+            $ort = $exif['Orientation'];
+
+            if ($ort == 6 || $ort == 5)
+                $user_photo = imagerotate($user_photo, 270, 0);
+            if ($ort == 3 || $ort == 4)
+                $user_photo = imagerotate($user_photo, 180, 0);
+            if ($ort == 8 || $ort == 7)
+                $user_photo = imagerotate($user_photo, 90, 0);
+
+            if ($ort == 5 || $ort == 4 || $ort == 7)
+                imageflip($user_photo, IMG_FLIP_HORIZONTAL);
         }
 
         // Calculate the size to maintain aspect ratio
