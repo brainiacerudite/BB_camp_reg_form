@@ -84,7 +84,7 @@ class TagController extends Controller
         $user = $user[0];
 
         // Path to the background image
-        $background_image_path = $_SERVER['DOCUMENT_ROOT'] . '/assets/tag_temp.png';
+        $background_image_path = $_SERVER['DOCUMENT_ROOT'] . "{$_ENV['ROOT']}/assets/tag_temp.png";
 
         // Create the image from the background
         $image = imagecreatefrompng($background_image_path);
@@ -94,7 +94,7 @@ class TagController extends Controller
         $white = imagecolorallocate($image, 255, 255, 255);
 
         // Set the font file path (use a TTF font file)
-        $font_path = $_SERVER['DOCUMENT_ROOT'] . '/assets/fonts/Roboto-Bold.ttf';
+        $font_path = $_SERVER['DOCUMENT_ROOT'] . "{$_ENV['ROOT']}/assets/fonts/Roboto-Bold.ttf";
 
         // User data to be added to the image
         $name = ucwords($user['surname'] . " " . $user['firstname'] . " " . $user['middlename']);
@@ -170,7 +170,7 @@ class TagController extends Controller
         imagecopy($image, $final_photo, $photo_x, $photo_y, 0, 0, $photo_width, $photo_height);
 
         // Save the image
-        $imageFileName = '/assets/tags/' . $userId . '.jpg';
+        $imageFileName = "{$_ENV['ROOT']}/assets/tags/{$userId}.jpg";
         $image_path = $_SERVER['DOCUMENT_ROOT'] . $imageFileName;
         imagejpeg($image, $image_path);
 

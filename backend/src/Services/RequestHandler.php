@@ -47,7 +47,7 @@ class RequestHandler
 
         // no error
         $file_name = uniqid('', true) . '.' . $file_ext;
-        $file_destination = "/uploads/{$file_name}";
+        $file_destination = "{$_ENV['ROOT']}/uploads/{$file_name}";
         move_uploaded_file($file_tmp, $_SERVER['DOCUMENT_ROOT'] . $file_destination);
         return [
             'status' => true,
@@ -86,7 +86,7 @@ class RequestHandler
 
         // Set the file path and name
         $fileName = uniqid('', true) . '.' . $type;
-        $file_destination = "/uploads/{$fileName}";
+        $file_destination = "{$_ENV['ROOT']}/uploads/{$fileName}";
 
         // // Create the uploads directory if it doesn't exist
         // if (!file_exists($filePath)) {

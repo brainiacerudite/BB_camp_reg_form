@@ -28,7 +28,7 @@ const Tag = () => {
     link.style.display = "none";
     document.body.appendChild(link);
     link.href = imageUrl;
-    link.download = id;
+    link.download = id || '';
     link.click();
     document.body.removeChild(link);
   };

@@ -10,7 +10,10 @@ import SuccessMessage from "../hi-fi/SuccessMessage";
 const RegisterForm = () => {
   const [image, setImage] = useState<string | null>(null);
 
-  const [errors, setErrors] = useState<string | null>("");
+  interface Errors {
+    [key: string]: string | null;
+  }
+  const [errors, setErrors] = useState<Errors>({});
 
   const [companyOtherValue, setCompanyOtherValue] = useState("");
   const [success, setSuccess] = useState<boolean>(false);
@@ -124,12 +127,12 @@ const RegisterForm = () => {
     setSelectedSection(value);
   };
 
-  const hasError = (field) => {
+  const hasError = (field: string) => {
     if (errors) {
       return Object.prototype.hasOwnProperty.call(errors, field);
     }
   };
-  const getError = (field) => {
+  const getError = (field: string) => {
     if (errors && Object.prototype.hasOwnProperty.call(errors, field)) {
       return errors[field];
     }
@@ -154,10 +157,13 @@ const RegisterForm = () => {
       if (res) setSuccess(true);
       // return <SuccessMessage />;
     } catch (err) {
-      if (err.response?.status === 422) {
-        setErrors(err.response.data.errors);
+      const errObj = err as {
+        response?: { status: number; data: { errors: object } };
+      };
+      if (errObj.response?.status === 422) {
+        setErrors(errObj.response.data.errors as Errors);
       }
-      console.log(err);
+      console.log(errObj);
     } finally {
       setIsLoading(false);
     }

@@ -21,13 +21,13 @@ $appSetup = new ApplicationSetup($config);
 $router = new Router();
 
 // Define routes
-$router->post('/register', ['App\Controllers\RegisterController', 'register']);
-$router->post('/check', ['App\Controllers\RegisterController', 'check']);
+$router->post("{$_ENV['ROOT']}/register", ['App\Controllers\RegisterController', 'register']);
+$router->post("{$_ENV['ROOT']}/check", ['App\Controllers\RegisterController', 'check']);
 // Define panel routes
-$router->get('/panel/list', ['App\Controllers\PanelController', 'list']);
-$router->get('/panel/search', ['App\Controllers\PanelController', 'search']);
+$router->get("{$_ENV['ROOT']}/panel/list", ['App\Controllers\PanelController', 'list']);
+$router->get("{$_ENV['ROOT']}/panel/search", ['App\Controllers\PanelController', 'search']);
 // General routes
-$router->get('/tag', ['App\Controllers\TagController', 'tag']);
+$router->get("{$_ENV['ROOT']}/tag", ['App\Controllers\TagController', 'tag']);
 
 // error_log("Actual Request URI: " . $_SERVER['REQUEST_URI']);
 // exclude query params from $_SERVER['REQUEST_URI']

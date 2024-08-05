@@ -23,7 +23,14 @@ class PanelController extends Controller
                     'name' => "{$item['surname']} {$item['firstname']} {$item['middlename']}",
                     'image' => "{$_ENV['APP_URL']}{$item['image']}",
                     'village' => "Village: " . ($item['village'] ?: 'None'),
-                    'culture' => "Culture: ".($item['culture'] ?: 'None'),
+                    'culture' => "Culture: " . ($item['culture'] ?: 'None'),
+                    'email' => "Email: " . ($item['email'] ?: '-'),
+                    'phone' => "Phone: " . ($item['phone'] ?: '-'),
+                    'gender' => "Gender: " . ($item['gender'] ?: '-'),
+                    'guardian_name' => "Guardian Name: " . ($item['guardian_name'] ?: '-'),
+                    'guardian_phone' => "Guardian Phone: " . ($item['guardian_phone'] ?: '-'),
+                    'company' => "Company: " . ($item['company'] ?: '-'),
+                    'section' => "Section: " . ($item['section'] ?: '-'),
                 ];
             }, $data),
         ], 200);
@@ -67,7 +74,14 @@ class PanelController extends Controller
                     'name' => "{$item['surname']} {$item['firstname']} {$item['middlename']}",
                     'image' => "{$_ENV['APP_URL']}{$item['image']}",
                     'village' => "Village: " . ($item['village'] ?: 'None'),
-                    'culture' => "Culture: ".($item['culture'] ?: 'None'),
+                    'culture' => "Culture: " . ($item['culture'] ?: 'None'),
+                    'email' => "Email: " . ($item['email'] ?: '-'),
+                    'phone' => "Phone: " . ($item['phone'] ?: '-'),
+                    'gender' => "Gender: " . ($item['gender'] ?: '-'),
+                    'guardian_name' => "Guardian Name: " . ($item['guardian_name'] ?: '-'),
+                    'guardian_phone' => "Guardian Phone: " . ($item['guardian_phone'] ?: '-'),
+                    'company' => "Company: " . ($item['company'] ?: '-'),
+                    'section' => "Section: " . ($item['section'] ?: '-'),
                 ];
             }, $data),
         ], 200);
