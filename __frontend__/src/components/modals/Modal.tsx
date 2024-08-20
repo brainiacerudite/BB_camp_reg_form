@@ -1,4 +1,5 @@
 import { MdOutlineCancel } from "react-icons/md";
+import "./Modal.css";
 
 interface ModalProps {
   handleToggled: () => void;
