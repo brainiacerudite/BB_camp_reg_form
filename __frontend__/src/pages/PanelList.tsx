@@ -43,7 +43,7 @@ const PanelList = () => {
   const [listCount, setListCount] = useState<number>(0);
   const [lists, setLists] = useState<DataType[] | null>([]);
   const [search, setSearch] = useState<string>("");
-  const [toggled, setToggled] = useState(true);
+  const [toggled, setToggled] = useState(false);
 
   const handleToggled = () => {
     setToggled(!toggled);
