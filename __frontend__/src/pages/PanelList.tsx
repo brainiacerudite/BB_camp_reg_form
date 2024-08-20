@@ -43,7 +43,7 @@ const PanelList = () => {
   const [listCount, setListCount] = useState<number>(0);
   const [lists, setLists] = useState<DataType[] | null>([]);
   const [search, setSearch] = useState<string>("");
-  const [toggled, setToggled] = useState(false);
+  const [toggled, setToggled] = useState(true);
 
   const handleToggled = () => {
     setToggled(!toggled);
@@ -92,7 +92,7 @@ const PanelList = () => {
   return (
     <>
       <div className="relative h-screen">
-        <div className="space-y-5 py-4 px-4 xl:px-40 bg-defaultBgImage bg-bgGlassMorphism backdrop-blur-sm bg-cover bg-no-repeat bg-fixed bg-center">
+        <div className="space-y-5 py-4 px-4 xl:px-40 bg-defaultBgImage bg-bgGlassMorphism backdrop-blur-sm bg-cover bg-no-repeat bg-fixed bg-center min-h-full">
           <div className="mt-4 flex items-center">
             <div className="w-full p-1 mr-2 border-gradient rounded-2xl backdrop-blur-sm">
               <input
