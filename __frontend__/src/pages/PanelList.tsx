@@ -197,6 +197,15 @@ const PanelList = () => {
           children={
             <>
               <div>hello child</div>
+              <div>hello child</div>
+              <div>hello child</div>
+              <div>hello child</div>
+              <div>hello child</div>
+              <div>hello child</div>
+              <div>hello child</div>
+              <div>hello child</div>
+              <div>hello child</div>
+              <div>hello child</div>
             </>
           }
         />

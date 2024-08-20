@@ -14,15 +14,15 @@ const Modal = ({ handleToggled, children }: ModalProps) => {
         className="absolute inset-0 bg-black opacity-60"
       ></div>
 
-      <div className="relative w-full max-w-[550px] flex rounded p-4 bg-bgGlassMorphism my-10 md:mt-10 flex-col m-auto px-5">
+      <div className="relative w-full max-w-[550px] mx-4 flex p-6 bg-yellow-600 bg-opacity-60 border-gradient rounded-2xl backdrop-blur-sm">
         <span
-          className="absolute right-4 text-2xl text-red-600 cursor-pointer"
+          className="absolute right-4 top-3 text-3xl text-red-500 cursor-pointer"
           onClick={handleToggled}
         >
           <MdOutlineCancel />
         </span>
+        <div className="relative mt-8 text-white">{children}</div>
       </div>
-      <div className="mt-8">{children}</div>
     </div>
   );
 };
