@@ -7,8 +7,13 @@ interface ModalProps {
 
 const Modal = ({ handleToggled, children }: ModalProps) => {
   return (
-    <div className="drop fixed top-0 left-0 w-full h-full z-50 px-5">
-      <div className="relative w-full max-w-[550px] flex rounded p-4 bg-neutral-200 my-10 md:mt-10 flex-col m-auto px-5">
+    <div className="fixed z-50 inset-0 flex items-center justify-center">
+      <div
+        onClick={handleToggled}
+        className="absolute inset-0 bg-black opacity-60"
+      ></div>
+
+      <div className="relative w-full max-w-[550px] flex rounded p-4 bg-bgGlassMorphism my-10 md:mt-10 flex-col m-auto px-5">
         <span
           className="absolute right-4 text-2xl text-red-600 cursor-pointer"
           onClick={handleToggled}
