@@ -1,10 +1,9 @@
 .drop {
-    background: rgba(0, 0, 0, 0.5);
-    animation: drop-animation 0.3s ease-in;
+  animation: drop-animation 0.3s ease-in;
 }
 
 @keyframes drop-animation {
-    0% {
-        top: -100%;
-    }
+  0% {
+    top: -100%;
+  }
 }
