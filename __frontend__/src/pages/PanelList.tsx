@@ -191,7 +191,7 @@ const PanelList = () => {
           </div>
         </div>
       </div>
-      {/* {toggled && (
+      {toggled && (
         <Modal
           handleToggled={handleToggled}
           children={
@@ -200,7 +200,7 @@ const PanelList = () => {
             </>
           }
         />
-      )} */}
+      )}
     </>
   );
 };
