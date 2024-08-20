@@ -62,12 +62,12 @@ const RegisterForm = () => {
       label: "14th Ogbomoso Coy St. Michael Anglican Church, Ayegun",
     },
     {
-      value: "16th",
-      label: "16th Ogbomoso Coy Salvation Anglican Church, Papa Adeyemo",
+      value: "17th",
+      label: "17th Ogbomoso Coy Salvation Anglican Church, Papa Adeyemo",
     },
     {
-      value: "17th",
-      label: "17th Ogbomoso Coy Christ Anglican Church, Kajola",
+      value: "16th",
+      label: "16th Ogbomoso Coy Christ Anglican Church, Kajola",
     },
     {
       value: "30th",
